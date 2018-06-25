@@ -1,0 +1,56 @@
+* {
+  box-sizing: border-box;
+  max-height: 100000px;
+  padding: 0;
+  margin: 0;
+  font-family: 'Microsoft YaHei', sans-serif;
+  font-size: .14rem;
+  color: #666;
+  font-weight: 300;
+}
+
+html {
+  font-size: 625%;
+}
+
+h1 {
+  font-size: .2rem;
+}
+
+h2 {
+  font-size: .18rem;
+}
+
+button {
+  min-width: .6rem;
+  height: .3rem;
+  padding: 0 .1rem;
+  border: 1px solid;
+  border-radius: .03rem;
+  background: transparent;
+}
+
+a, button {
+  opacity: .8;
+}
+
+a:hover, button:hover {
+  opacity: 1;
+}
+
+a, button, .transition {
+  transition: all .5s;
+}
+
+.main-content {
+  max-width: 100%;
+  width: 1000px;
+  margin: 0 auto;
+}
+
+@media screen and (orientation: portrait) {
+  .main-content {
+    width: auto;
+    margin: 0 .2rem;
+  }
+}

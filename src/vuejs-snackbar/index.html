@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <title>vue-slide-for-more -- livelybone</title>
+  <link rel="shortcut icon" href="">
+  <script src="../common/js/common.js"></script>
+  <!--<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="Snackbar.js"></script>
+  <link rel="stylesheet" href="../common/css/common.css">
+  <style type="text/css">
+  .btn-groups {
+    margin: .4rem auto;
+  }
+
+  button {
+    margin: 0 .2rem 0 0;
+  }
+
+  .gray {
+    border-color: #333;
+    color: #333;
+  }
+
+  .green {
+    border-color: #3DBD7D;
+    color: #3DBD7D;
+  }
+
+  .yellow {
+    border-color: #FF6600;
+    color: #FF6600;
+  }
+
+  .red {
+    border-color: #FA7377;
+    color: #FA7377;
+  }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<div id="app1"></div>
+<div class="main-content btn-groups">
+  <button class="gray">trigger open function</button>
+  <button class="green">trigger info function</button>
+  <button class="yellow">trigger warn function</button>
+  <button class="red">trigger error function</button>
+</div>
+<script type="text/javascript">
+var vue = new Vue({
+  el: '#app',
+  template: '<snackbar baseSize="1rem" ref="snackbar" :holdTime="1000000"/>',
+  data: function () {
+    return {}
+  },
+  components: { 'snackbar': VueSnackbar }
+});
+window.addEventListener('DOMContentLoaded', function () {
+  getEl('.gray')[0].addEventListener('click', function () {
+    vue.$refs.snackbar.open('trigger open function');
+  });
+  getEl('.green')[0].addEventListener('click', function () {
+    vue.$refs.snackbar.info('trigger info function');
+  });
+  getEl('.yellow')[0].addEventListener('click', function () {
+    vue.$refs.snackbar.warn('trigger warn function');
+  });
+  getEl('.red')[0].addEventListener('click', function () {
+    vue.$refs.snackbar.error('trigger error function');
+  })
+})
+</script>
+</body>
+</html>
