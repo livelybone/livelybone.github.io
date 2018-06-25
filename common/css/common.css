@@ -5,6 +5,7 @@
   margin: 0;
   font-family: 'Microsoft YaHei', sans-serif;
   font-size: .14rem;
+  letter-spacing: .01rem;
   color: #666;
   font-weight: 300;
 }
@@ -53,4 +54,16 @@ a, button, .transition {
     width: auto;
     margin: 0 .2rem;
   }
+}
+
+.row-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.column-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
