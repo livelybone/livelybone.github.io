@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <title>vue-slide-for-more -- vue -- livelybone</title>
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <script src="../../common/js/common.js"></script>
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="main.css">
+  <script src="jquery.js"></script>
+  <script src="jquery.mousewheel.js"></script>
+  <script src="kline.js"></script>
+  <style type="text/css">
+  * {
+    box-sizing: content-box;
+  }
+
+  .item {
+    height: 1rem;
+    line-height: 1rem;
+    text-align: center;
+    background: #fff;
+  }
+
+  .item:nth-child(2n) {
+    background: #3DBD7D;
+    color: #fff;
+  }
+
+  .tip-wrap {
+    padding: 30vh 0 0;
+  }
+
+  .tip {
+    padding: .1rem 0;
+    text-align: center;
+    font-size: .2rem;
+    color: #999;
+  }
+  </style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/javascript">
+new window.Kline({
+  element: '#app',
+  debug: false,
+  type: 'poll',
+  url: './mock.json'
+}).draw();
+</script>
+</body>
+</html>
