@@ -38,14 +38,10 @@ new Vue({
   data: function () {
     return {
       data: [],
-      loading: false,
+      loading: false
     }
   },
   methods: {
-    set: function (res) {
-      this.data = res.data.data.lines
-      console.log(this.data)
-    },
     getMorePreData: function () {
       console.log('getMorePreData')
       this.loading = true
@@ -61,13 +57,13 @@ new Vue({
       setTimeout(function () {
         that.loading = false
       }, 1000)
-    },
+    }
   },
   beforeMount: function () {
     this.loading = true
     var that = this
     setTimeout(function () {
-      this.data = [
+      that.data = [
         [
           1.5121452E12,
           91.29,
@@ -8068,11 +8064,10 @@ new Vue({
           101.15,
           564.82
         ]
-      ],
-
-        that.loading = false
+      ]
+      that.loading = false
     }, 1500)
-  },
+  }
 })
 </script>
 </body>
