@@ -8066,7 +8066,14 @@ new Vue({
         ]
       ]
       that.loading = false
-      console.log(that.data)
+      setInterval(function () {
+        var index = that.data.length - 1
+        var prices = that.data[index].concat([])
+        prices[4] = +(that.data[index][4] + 0.01).toFixed(2)
+        prices[2] = Math.max(prices[2], prices[4])
+        prices[3] = Math.min(prices[3], prices[4])
+        that.data = that.data.slice(0, index).concat([prices])
+      }, 3000)
     }, 1500)
   }
 })
