@@ -4,33 +4,15 @@
   <meta charset="UTF-8">
   <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
   <title>Kline</title>
-  <script>
-  function setViewport(specialScale) {
-    if (typeof window !== 'undefined') {
-      // canScale用来应付特殊情况
-      var scale = window.devicePixelRatio || 1
-      var content = 'width=device-width, initial-scale=1, minimum-scale=1'
-      if (scale !== 1) {
-        document.documentElement.style.fontSize = 625 * scale + '%'
-        var s = specialScale ? 1 / scale / scale / (1200 / scale / window.screen.availWidth)
-          : 1 / scale
-        content = 'width=device-width, initial-scale=' + s + ', minimum-scale=' + s
-      } else {
-        document.documentElement.style.fontSize = '625%'
-      }
-      var meta = document.createElement('meta')
-      meta.setAttribute('name', 'viewport')
-      meta.setAttribute('content', content)
-      document.head.appendChild(meta)
-    }
-  }
-
-  setViewport()
-  </script>
-  <script src="https://cdn.bootcss.com/babel-polyfill/7.0.0-rc.4/polyfill.min.js"></script>
-  <script src="https://cdn.bootcss.com/vue/2.5.17-beta.0/vue.min.js"></script>
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <script src="../../common/js/common.js"></script>
+  <script src="../../common/js/polyfill.min.js"></script>
+  <script src="../../common/js/vue.min.js"></script>
   <script src="./index.js"></script>
-  <script src="https://cdn.bootcss.com/axios/0.19.0-beta.1/axios.min.js"></script>
   <link rel="stylesheet" href="./index.css">
   <style>
 
@@ -56,25 +38,29 @@
 <script>
 new Vue({
   el: '#module',
-  template: '<kline :data="data" :loading="loading" @getMorePreData="getMorePreData" @periodChange="periodChange"></kline>',
+  template: '<kline :isMobile="isMobile" :data="data" :loading="loading" @getMorePreData="getMorePreData" :period.sync="period"></kline>',
   components: { kline: Kline },
   data: function () {
     return {
       data: [],
+      isMobile: window.isMobile,
+      period: {},
       loading: false
     }
   },
-  methods: {
-    getMorePreData: function () {
-      console.log('getMorePreData')
+  watch: {
+    period: function (val) {
+      console.log('periodChange', val)
       this.loading = true
       var that = this
       setTimeout(function () {
         that.loading = false
       }, 1000)
-    },
-    periodChange: function (val) {
-      console.log('periodChange', val)
+    }
+  },
+  methods: {
+    getMorePreData: function () {
+      console.log('getMorePreData')
       this.loading = true
       var that = this
       setTimeout(function () {
