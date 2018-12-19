@@ -8063,13 +8063,15 @@ new Vue({
     }
   },
   watch: {
-    period: function (val) {
+    period: function (val, oldVal) {
       console.log('periodChange', val)
-      this.loading = true
-      var that = this
-      setTimeout(function () {
-        that.loading = false
-      }, 1000)
+      if (oldVal.value) {
+        this.loading = true
+        var that = this
+        setTimeout(function () {
+          that.loading = false
+        }, 1000)
+      }
     }
   },
   methods: {
