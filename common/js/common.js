@@ -24,4 +24,66 @@ function getEl(selector) {
   return document.querySelectorAll(selector)
 }
 
+function createEl(tag, attrs) {
+  var el = document.createElement(tag)
+  Object.keys(attrs).forEach(function (attr) {
+    if (attr === 'class' || attr === 'className') el.className = attrs[attr]
+    else if (attr === 'innerText' || attr === 'text') el.innerText = attrs[attr]
+    else if (attr === 'innerHTML' || attr.toLowerCase() === 'html') el.innerHTML = attrs[attr]
+    else el.setAttribute(attr, attrs[attr])
+  })
+  return el
+}
+
+function parseJsText(jsText) {
+  var reg = {
+    section: /\/\*START\*\/[\d\D]*\/\*END\*\//g,
+    sectionContent: /\/\*START\*\/\n?([\d\D]*)\/\*END\*\//,
+    name: /\/\*NAME:([a-zA-Z-./]*)\*\//
+  }
+
+  return jsText.match(reg.section).map(function (section) {
+    var content = section.match(reg.sectionContent)[1] || ''
+    var name = (content.match(reg.name) || [, 'default'])[1]
+    return {
+      name: name,
+      code: content.replace(name, '')
+    }
+  })
+}
+
+function createCodeFragment(codeSections, codeDealFn) {
+  var codeWrap = createEl('section', {
+    className: 'code-wrap',
+    html: '<h2 class="h code-h">Code</h2>'
+  })
+  var sectionName, code
+  if (codeSections instanceof Array) {
+    codeSections.forEach(function (section) {
+      if (section.name && section.name !== 'default') {
+        sectionName = createEl('h2', { className: 'code-title', text: 'Module: ' + section.name })
+        codeWrap.appendChild(sectionName)
+      }
+      if (section.code) {
+        code = createEl('pre', { className: 'code', text: section.code })
+        codeWrap.appendChild(code)
+        if (typeof codeDealFn === 'function') codeDealFn(code)
+      }
+    })
+  }
+  document.body.appendChild(codeWrap)
+}
+
 setViewport(/noScale/i.test(location.href))
+
+window.addEventListener('DOMContentLoaded', function () {
+  const code = getEl('#code')[0]
+  if (code) createCodeFragment(parseJsText(code.innerText), function (node) {
+    if (hljs && hljs.highlightBlock) {
+      hljs.configure({
+        languages: ['javascript']
+      })
+      hljs.highlightBlock(node)
+    }
+  })
+})

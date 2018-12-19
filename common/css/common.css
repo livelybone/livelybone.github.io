@@ -1,13 +1,14 @@
 body {
   box-sizing: border-box;
   max-height: 100000px;
-  padding: 0;
+  padding: 0 0 .4rem;
   margin: 0;
-  font-family: 'Microsoft YaHei', sans-serif;
+  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
   font-size: .14rem;
-  letter-spacing: .01rem;
-  color: #666;
+  color: #636c73;
   font-weight: 300;
+  letter-spacing: .01rem;
+  background: #fff;
 }
 
 html {
@@ -16,10 +17,12 @@ html {
 
 h1 {
   font-size: .2rem;
+  margin: 0;
 }
 
 h2 {
   font-size: .18rem;
+  margin: 0;
 }
 
 button {
@@ -67,4 +70,59 @@ a, button, .transition {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.h1 {
+  box-sizing: border-box;
+  position: relative;
+  width: calc(100% - .3rem);
+  margin: .2rem auto 0;
+  padding: 0 0 0 .2rem;
+  line-height: .3rem;
+  font-size: .18rem;
+  font-weight: 500;
+  color: #262f3a;
+  background: rgba(47, 158, 178, .05);
+}
+
+.h1:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #2fb9b2;
+}
+
+.h {
+  display: inline-block;
+  margin: .4rem 0 .2rem;
+  line-height: .24rem;
+  font-size: .15rem;
+  font-weight: 500;
+  color: #999;
+  border-bottom: 2px solid #2fb9b2;
+}
+
+.code-wrap, .app {
+  box-sizing: border-box;
+  width: calc(100% - .3rem);
+  margin: 0 auto;
+}
+
+.example {
+  padding: 1em;
+  border: 1px solid #eaefef;
+  border-radius: .03rem;
+}
+
+.code-title {
+  margin: .2rem 0 .1rem;
+  font-size: .14rem;
+  font-weight: 500;
+}
+
+.code-title:nth-child(2) {
+  margin-top: 0;
 }

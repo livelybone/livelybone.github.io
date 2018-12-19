@@ -8,7 +8,9 @@
   <link rel="shortcut icon" href="../../logo.png">
   <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
   <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
   <script src="../../common/js/common.js"></script>
+  <script src="../../common/js/highlight.min.js"></script>
   <script src="../../common/js/vue.min.js"></script>
   <script src="https://unpkg.com/vue-slide-for-more@4.0.0/lib/umd/index.js"></script>
   <link href="https://unpkg.com/vue-slide-for-more@4.0.0/lib/css/index.css" rel="stylesheet">
@@ -26,16 +28,15 @@
   }
 
   .slide-for-more-base-wrap {
-    height: 100vh;
+    height: 70vh;
   }
 
   .slide-for-more-content {
-    min-height: 100vh;
+    min-height: 70vh;
     box-shadow: none !important;
   }
 
   .tip-wrap {
-    padding: 30vh 0 0;
   }
 
   .tip {
@@ -47,11 +48,31 @@
   </style>
 </head>
 <body>
-<div id="app"></div>
-<script type="text/javascript">
+<h1 class="h1">vue-slide-for-more</h1>
+<div class="app">
+  <h2 class="h">Example</h2>
+  <div class="example">
+    <div id="app"></div>
+  </div>
+</div>
+<script type="text/javascript" id="code">
+/*START*/
 new Vue({
   el: '#app',
-  template: '<slide-for-more v-if="isMobile" tipHeight=".4rem" :isSearching="isSearching" @refresh="refresh" @loadMore="loadMore"><div v-for="(c, i) in list" :key="i" class="item">{{c}}</div></slide-for-more><div v-else class="tip-wrap"><p class="tip">请使用移动端浏览器或者 chrome devtools 查看</p><p class="tip">Please see it at mobile browser of chrome devtools.</p></div>',
+  template: '<slide-for-more v-if="isMobile"' +
+  '                          tipHeight=".4rem"' +
+  '                          :isSearching="isSearching"' +
+  '                          @refresh="refresh"' +
+  '                          @loadMore="loadMore">' +
+  '           <div v-for="(c, i) in list"' +
+  '                :key="i"' +
+  '                class="item">{{c}}</div>' +
+  '         </slide-for-more>' +
+  '         <div v-else' +
+  '              class="tip-wrap">' +
+  '           <p class="tip">请使用移动端浏览器或者 chrome devtools 查看</p>' +
+  '           <p class="tip">Please see it at mobile browser of chrome devtools.</p>' +
+  '         </div>',
   data: function () {
     return {
       list: ['content', 'content', 'content', 'content'],
@@ -80,6 +101,7 @@ new Vue({
   },
   components: { 'slide-for-more': VueSlideForMore.SlideForMore }
 })
+/*END*/
 </script>
 </body>
 </html>
