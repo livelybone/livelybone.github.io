@@ -1,3 +1,7 @@
+* {
+  max-height: 100000rem; /* font-boosting */
+}
+
 body {
   box-sizing: border-box;
   max-height: 100000px;
@@ -9,10 +13,6 @@ body {
   font-weight: 300;
   letter-spacing: .01rem;
   background: #fff;
-}
-
-html {
-  font-size: 625%;
 }
 
 h1 {
@@ -37,27 +37,15 @@ button {
 
 a, button {
   opacity: .8;
+  text-decoration: none;
 }
 
 a:hover, button:hover {
   opacity: 1;
 }
 
-a, button, .transition {
-  transition: all .5s;
-}
-
-.main-content {
-  max-width: 100%;
-  width: 1000px;
-  margin: 0 auto;
-}
-
-@media screen and (orientation: portrait) {
-  .main-content {
-    width: auto;
-    margin: 0 .2rem;
-  }
+.transition {
+  transition: all .5s cubic-bezier(.4, 0, .2, 1);
 }
 
 .row-center {
@@ -111,7 +99,7 @@ a, button, .transition {
   margin: 0 auto;
 }
 
-.example {
+.example-wrap {
   padding: 1em;
   border: 1px solid #eaefef;
   border-radius: .03rem;
