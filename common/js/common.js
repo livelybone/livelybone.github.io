@@ -39,15 +39,18 @@ function parseJsText(jsText) {
   var reg = {
     section: /\/\*START\*\/[\d\D]*\/\*END\*\//g,
     sectionContent: /\/\*START\*\/\n?([\d\D]*)\/\*END\*\//,
-    name: /\/\*NAME:([a-zA-Z-./]*)\*\//
+    name: /\/\*NAME:([a-zA-Z-./\s]*)\*\//,
+    desc: /\/\*DESC:([a-zA-Z-./\s]*)\*\//
   }
 
   return jsText.match(reg.section).map(function (section) {
     var content = section.match(reg.sectionContent)[1] || ''
     var name = (content.match(reg.name) || [, 'default'])[1]
+    var desc = (content.match(reg.desc) || [, ''])[1]
     return {
       name: name,
-      code: content.replace(name, '')
+      desc: desc,
+      code: content.replace(reg.name, '').replace(reg.desc, '').replace(/^\n*/, '')
     }
   })
 }
@@ -55,14 +58,18 @@ function parseJsText(jsText) {
 function createCodeFragment(codeSections, codeDealFn) {
   var codeWrap = createEl('section', {
     className: 'code-wrap',
-    html: '<h2 class="h code-h">Code</h2>'
+    html: '<h2 class="h code-h">Code</h2><br>'
   })
-  var sectionName, code
+  var sectionName, sectionDesc, code
   if (codeSections instanceof Array) {
     codeSections.forEach(function (section) {
       if (section.name && section.name !== 'default') {
         sectionName = createEl('h2', { className: 'code-title', text: 'Module: ' + section.name })
         codeWrap.appendChild(sectionName)
+      }
+      if (section.desc) {
+        sectionDesc = createEl('p', { className: 'frame-desc', text: section.desc })
+        codeWrap.appendChild(sectionDesc)
       }
       if (section.code) {
         code = createEl('pre', { className: 'code', text: section.code })

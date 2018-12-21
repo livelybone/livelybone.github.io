@@ -106,11 +106,19 @@ a:hover, button:hover {
 }
 
 .code-title {
-  margin: .2rem 0 .1rem;
-  font-size: .14rem;
+  display: inline-block;
+  margin: 0 0 .1rem;
+  padding: .02rem .05rem;
+  font-size: .15rem;
   font-weight: 500;
+  border-radius: .02rem;
+  background: #f3f9f9;
 }
 
 .code-title:nth-child(2) {
   margin-top: 0;
+}
+
+.frame-desc {
+  margin: 0 0 .1rem;
 }
