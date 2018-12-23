@@ -50,7 +50,7 @@ function parseJsText(jsText) {
     return {
       name: name,
       desc: desc,
-      code: content.replace(reg.name, '').replace(reg.desc, '').replace(/^\n*/, '')
+      code: content.replace(reg.name, '').replace(reg.desc, '').replace(/((^\n*)|(\n*$))/, '')
     }
   })
 }

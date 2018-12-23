@@ -8036,63 +8036,68 @@ var klineData = [
     564.82
   ]
 ]
-/*START*/
-new Vue({
-  el: '#module',
-  template: '<kline :isMobile="isMobile"' +
-  '                 :data="data"' +
-  '                 :loading="loading"' +
-  '                 :period.sync="period"' +
-  '                 @getMorePreData="getMorePreData"></kline>',
-  components: { kline: Kline },
-  data: function () {
-    return {
-      data: [],
-      isMobile: window.isMobile,
-      period: {},
-      loading: false
-    }
-  },
-  watch: {
-    period: function (val, oldVal) {
-      console.log('periodChange', val)
-      if (oldVal.value) {
+
+function render() {
+  /*START*/
+  new Vue({
+    el: '#module',
+    template: '<kline :isMobile="isMobile"' +
+    '                 :data="data"' +
+    '                 :loading="loading"' +
+    '                 :period.sync="period"' +
+    '                 @getMorePreData="getMorePreData"></kline>',
+    components: { kline: Kline },
+    data: function () {
+      return {
+        data: [],
+        isMobile: window.isMobile,
+        period: {},
+        loading: false
+      }
+    },
+    watch: {
+      period: function (val, oldVal) {
+        console.log('periodChange', val)
+        if (oldVal.value) {
+          this.loading = true
+          var that = this
+          setTimeout(function () {
+            that.loading = false
+          }, 1000)
+        }
+      }
+    },
+    methods: {
+      getMorePreData: function () {
+        console.log('getMorePreData')
         this.loading = true
         var that = this
         setTimeout(function () {
           that.loading = false
         }, 1000)
       }
-    }
-  },
-  methods: {
-    getMorePreData: function () {
-      console.log('getMorePreData')
+    },
+    beforeMount: function () {
       this.loading = true
       var that = this
       setTimeout(function () {
+        that.data = klineData
         that.loading = false
-      }, 1000)
+        setInterval(function () {
+          var index = that.data.length - 1
+          var prices = that.data[index].concat([])
+          prices[4] = +(that.data[index][4] + 0.01).toFixed(2)
+          prices[2] = Math.max(prices[2], prices[4])
+          prices[3] = Math.min(prices[3], prices[4])
+          that.data = that.data.slice(0, index).concat([prices])
+        }, 3000)
+      }, 1500)
     }
-  },
-  beforeMount: function () {
-    this.loading = true
-    var that = this
-    setTimeout(function () {
-      that.data = klineData
-      that.loading = false
-      setInterval(function () {
-        var index = that.data.length - 1
-        var prices = that.data[index].concat([])
-        prices[4] = +(that.data[index][4] + 0.01).toFixed(2)
-        prices[2] = Math.max(prices[2], prices[4])
-        prices[3] = Math.min(prices[3], prices[4])
-        that.data = that.data.slice(0, index).concat([prices])
-      }, 3000)
-    }, 1500)
-  }
-})
-/*END*/
+  })
+  /*END*/
+}
+
+window.addEventListener('DOMContentLoaded', render)
 </script>
 </body>
 </html>
