@@ -39,8 +39,8 @@ function parseJsText(jsText) {
   var reg = {
     section: /\/\*START\*\/[\d\D]*\/\*END\*\//g,
     sectionContent: /\/\*START\*\/\n?([\d\D]*)\/\*END\*\//,
-    name: /\/\*NAME:([a-zA-Z-./\s]*)\*\//,
-    desc: /\/\*DESC:([a-zA-Z-./\s]*)\*\//
+    name: /\/\*NAME:\s*(.*)\*\//,
+    desc: /\/\*DESC:\s*(.*)\*\//
   }
 
   return jsText.match(reg.section).map(function (section) {
