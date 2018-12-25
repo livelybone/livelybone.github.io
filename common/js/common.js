@@ -37,38 +37,39 @@ function createEl(tag, attrs) {
 
 function parseJsText(jsText) {
   var reg = {
-    section: /\/\*START\*\/[\d\D]*\/\*END\*\//g,
-    sectionContent: /\/\*START\*\/\n?([\d\D]*)\/\*END\*\//,
     name: /\/\*NAME:\s*(.*)\*\//,
     desc: /\/\*DESC:\s*(.*)\*\//
   }
 
-  return jsText.match(reg.section).map(function (section) {
-    var content = section.match(reg.sectionContent)[1] || ''
-    var name = (content.match(reg.name) || [, 'default'])[1]
-    var desc = (content.match(reg.desc) || [, ''])[1]
-    return {
-      name: name,
-      desc: desc,
-      code: content.replace(reg.name, '').replace(reg.desc, '').replace(/((^\n*)|(\n*$))/, '')
-    }
-  })
+  var arr = jsText.split(/\/\*START\*\/|\/\*END\*\//)
+
+  return arr
+    .slice(1, arr.length - 1)
+    .map(function (content) {
+      var name = (content.match(reg.name) || [, 'default'])[1]
+      var desc = (content.match(reg.desc) || [, ''])[1]
+      return {
+        name: name,
+        desc: desc,
+        code: content.replace(reg.name, '').replace(reg.desc, '').replace(/((^\n*)|(\n*$))/, '')
+      }
+    })
 }
 
 function createCodeFragment(codeSections, codeDealFn) {
   var codeWrap = createEl('section', {
     className: 'code-wrap',
-    html: '<h2 class="h code-h">Code</h2><br>'
+    html: '<h2 class="root-h code-h">Code</h2><br>'
   })
   var sectionName, sectionDesc, code
   if (codeSections instanceof Array) {
     codeSections.forEach(function (section) {
       if (section.name && section.name !== 'default') {
-        sectionName = createEl('h2', { className: 'code-title', text: 'Module: ' + section.name })
+        sectionName = createEl('h2', { className: 'code-title', html: 'Module: ' + section.name })
         codeWrap.appendChild(sectionName)
       }
       if (section.desc) {
-        sectionDesc = createEl('p', { className: 'frame-desc', text: section.desc })
+        sectionDesc = createEl('p', { className: 'root-desc', html: section.desc })
         codeWrap.appendChild(sectionDesc)
       }
       if (section.code) {

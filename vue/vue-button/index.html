@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="../../common/css/common.css">
   <link rel="stylesheet" href="../../common/css/highlight.min.css">
   <script src="../../common/js/common.js"></script>
+  <script src="../../common/js/copy.js"></script>
   <script src="../../common/js/highlight.min.js"></script>
   <script src="../../common/js/vue.min.js"></script>
   <script src="https://unpkg.com/@livelybone/vue-loading"></script>
@@ -18,11 +19,11 @@
   <script src="https://unpkg.com/@livelybone/vue-button"></script>
   <style>
   .vue-btn {
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
+    width: 1rem;
+    height: .4rem;
+    line-height: .4rem;
     border: none;
-    border-radius: 2px;
+    border-radius: .02rem;
     color: #fff;
     background: #5a94b4;
     vertical-align: middle;
@@ -42,14 +43,20 @@
   }
 
   .loading {
-    margin: 10px 0 0;
+    margin: .1rem 0 0;
   }
   </style>
 </head>
 <body>
-<h1 class="h1">vue-button</h1>
+<h1 class="root-h1">vue-button</h1>
 <div class="app">
-  <h2 class="h">Example</h2>
+  <h2 class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/vue-button" target="_blank">
+      https://github.com/livelybone/vue-button
+    </a>
+  </div>
+  <h2 class="root-h">Example</h2>
   <div class="example-wrap">
     <div id="module"></div>
   </div>
@@ -62,7 +69,7 @@ new Vue({
   el: '#module',
   template: '<vue-btn :clickFn="submit" :errorFn="error">\n' +
   '    提交\n' +
-  '    <loading class="loading" slot="lock" size="20px" color="#fff"/>\n' +
+  '    <loading class="loading" slot="lock" size=".2rem" color="#fff"/>\n' +
   '  </vue-btn>',
   data: function () {
     return {}
