@@ -25,6 +25,7 @@ function getEl(selector) {
 }
 
 function createEl(tag, attrs) {
+  if (!tag) return document.createDocumentFragment()
   var el = document.createElement(tag)
   Object.keys(attrs).forEach(function (attr) {
     if (attr === 'class' || attr === 'className') el.className = attrs[attr]
@@ -37,8 +38,9 @@ function createEl(tag, attrs) {
 
 function parseJsText(jsText) {
   var reg = {
-    name: /\/\*NAME:\s*(.*)\*\//,
-    desc: /\/\*DESC:\s*(.*)\*\//
+    renderId: /\/\*RENDER_ID:\s*(.*)\s*\*\//,
+    name: /\/\*NAME:\s*(.*)\s*\*\//,
+    desc: /\/\*DESC:\s*(.*)\s*\*\//
   }
 
   var arr = jsText.split(/\/\*START\*\/|\/\*END\*\//)
@@ -49,40 +51,65 @@ function parseJsText(jsText) {
       return /\w/.test(content)
     })
     .map(function (content) {
+      var renderId = (content.match(reg.renderId) || [, ''])[1]
       var name = (content.match(reg.name) || [, 'default'])[1]
       var desc = (content.match(reg.desc) || [, ''])[1]
       return {
+        renderId: renderId,
         name: name,
         desc: desc,
-        code: content.replace(reg.name, '').replace(reg.desc, '').replace(/((^\n*)|(\n*$))/, '')
+        code: content
+          .replace(reg.renderId, '')
+          .replace(reg.name, '')
+          .replace(reg.desc, '')
+          .replace(/((^\n*)|(\n*$))/, '')
       }
     })
 }
 
 function createCodeFragment(codeSections, codeDealFn) {
-  var codeWrap = createEl('section', {
-    className: 'code-wrap',
-    html: '<h2 class="root-h code-h">Code</h2><br>'
+  var codeRenderedCount = 0
+  codeSections.some(function (section) {
+    return section.renderId
   })
+  var codeFragment = createEl()
   var sectionName, sectionDesc, code
   if (codeSections instanceof Array) {
     codeSections.forEach(function (section) {
+      var frag = createEl()
       if (section.name && section.name !== 'default') {
         sectionName = createEl('h2', { className: 'code-title', html: section.name })
-        codeWrap.appendChild(sectionName)
+        frag.appendChild(sectionName)
       }
       if (section.desc) {
         sectionDesc = createEl('p', { className: 'root-desc', html: section.desc })
-        codeWrap.appendChild(sectionDesc)
+        frag.appendChild(sectionDesc)
       }
       if (section.code) {
         code = createEl('pre', { className: 'code', text: section.code })
-        codeWrap.appendChild(code)
+        frag.appendChild(code)
         if (typeof codeDealFn === 'function') codeDealFn(code)
+      }
+
+      if (section.renderId) {
+        const parent = getEl('#' + section.renderId)[0]
+        parent.appendChild(frag)
+        parent.className = parent.className ? parent.className + ' ' + 'code-wrap' : 'code-wrap'
+        codeRenderedCount++
+      } else {
+        codeFragment.appendChild(frag)
       }
     })
   }
-  document.body.appendChild(codeWrap)
+
+  if (codeRenderedCount < codeSections.length) {
+    var codeWrap = createEl('section', {
+      className: 'other-code-wrap',
+      html: '<h2 class="root-h code-h">' + (codeRenderedCount !== 0 ? 'Other Code' : 'Code') + '</h2><br>'
+    })
+    codeWrap.appendChild(codeFragment)
+    document.body.appendChild(codeWrap)
+  }
 }
 
 setViewport(/noScale/i.test(location.href))

@@ -25,7 +25,7 @@
     /*width: 120vw;*/
   }
 
-  .example-wrap {
+  .example-wrap.first {
     border-top-width: 50vh;
   }
 
@@ -50,15 +50,28 @@
       https://github.com/livelybone/vue-datepicker
     </a>
   </div>
-  <h2 class="root-h">Example</h2>
-  <div class="example-wrap">
-    <div class="root-module-title">Datepicker</div>
+
+  <h2 class="root-h">Datepicker</h2>
+  <div class="example-wrap first">
+    <div class="root-module-title">Example</div>
     <div id="datepicker"></div>
-    <div class="root-module-title">Timepicker</div>
-    <div id="timepicker"></div>
-    <div class="root-module-title">DatetimePicker</div>
-    <div id="datetime-picker"></div>
+    <div id="datepicker-code"></div>
   </div>
+
+  <h2 class="root-h">Timepicker</h2>
+  <div class="example-wrap">
+    <div class="root-module-title">Example</div>
+    <div id="timepicker"></div>
+    <div id="timepicker-code"></div>
+  </div>
+
+  <h2 class="root-h">DatetimePicker</h2>
+  <div class="example-wrap">
+    <div class="root-module-title">Example</div>
+    <div id="datetime-picker"></div>
+    <div id="datetime-picker-code"></div>
+  </div>
+
 </div>
 
 <script src="../../common/js/highlight.min.js"></script>
@@ -84,7 +97,8 @@ var popperProps = {
 /*END*/
 
 /*START*/
-/*NAME:Datepicker*/
+/*RENDER_ID:datepicker-code*/
+/*NAME:Code*/
 new Vue({
   el: '#datepicker',
   template: '<datepicker :value="date"' +
@@ -111,7 +125,8 @@ new Vue({
 /*END*/
 
 /*START*/
-/*NAME:Timepicker*/
+/*RENDER_ID:timepicker-code*/
+/*NAME:Code*/
 new Vue({
   el: '#timepicker',
   template: '<timepicker type="second"' +
@@ -141,7 +156,8 @@ new Vue({
 /*END*/
 
 /*START*/
-/*NAME:DatetimePicker*/
+/*RENDER_ID:datetime-picker-code*/
+/*NAME:Code*/
 new Vue({
   el: '#datetime-picker',
   template: '<datetime-picker type="second"' +

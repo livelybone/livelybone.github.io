@@ -19,8 +19,8 @@
     margin-top: 0;
   }
 
-  .root-module-title.lazy {
-    margin-top: 100vh;
+  .example-wrap.lazy {
+    border-top-width: 100vh;
   }
 
   .img-tag {
@@ -48,16 +48,28 @@
       https://github.com/livelybone/vue-img-tag
     </a>
   </div>
-  <h2 class="root-h">Example</h2>
+
+  <h2 class="root-h">Normal</h2>
   <div class="example-wrap">
-    <h3 class="root-module-title">Normal</h3>
+    <h3 class="root-module-title">Example</h3>
     <div id="normal"></div>
-    <h3 class="root-module-title">Input file</h3>
+    <div id="normal-code"></div>
+  </div>
+
+  <h2 class="root-h">Input file</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3>
     <p class="root-desc">Just for showing input file</p>
     <input type="file" id="input">
     <div id="file"></div>
-    <h3 class="root-module-title lazy">Lazy load</h3>
+    <div id="file-code"></div>
+  </div>
+
+  <h2 class="root-h">Lazy load</h2>
+  <div class="example-wrap lazy">
+    <h3 class="root-module-title">Example</h3>
     <div id="lazy"></div>
+    <div id="lazy-code"></div>
   </div>
 </section>
 
@@ -68,7 +80,8 @@
 <script id="code">
 console.log(VueImgTag)
 /*START*/
-/*NAME:Lazy load*/
+/*RENDER_ID: normal-code*/
+/*NAME: Code*/
 new Vue({
   el: '#normal',
   template: '<img-tag class="img-tag"' +
@@ -92,8 +105,8 @@ new Vue({
 /*END*/
 
 /*START*/
-/*NAME:Input file*/
-/*DESC:Just for showing input file*/
+/*RENDER_ID: file-code*/
+/*NAME: Code*/
 var img = new Vue({
   el: '#file',
   template: '<img-tag v-if="img" class="img-tag"' +
@@ -121,7 +134,8 @@ document.getElementById('input').addEventListener('change', function (ev) {
 /*END*/
 
 /*START*/
-/*NAME:Lazy load*/
+/*RENDER_ID: lazy-code*/
+/*NAME: Code*/
 new Vue({
   el: '#lazy',
   template: '<img-tag class="img-tag lazy-img"' +
