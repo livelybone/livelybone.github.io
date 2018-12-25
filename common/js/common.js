@@ -45,6 +45,9 @@ function parseJsText(jsText) {
 
   return arr
     .slice(1, arr.length - 1)
+    .filter(function (content) {
+      return /\w/.test(content)
+    })
     .map(function (content) {
       var name = (content.match(reg.name) || [, 'default'])[1]
       var desc = (content.match(reg.desc) || [, ''])[1]
@@ -65,7 +68,7 @@ function createCodeFragment(codeSections, codeDealFn) {
   if (codeSections instanceof Array) {
     codeSections.forEach(function (section) {
       if (section.name && section.name !== 'default') {
-        sectionName = createEl('h2', { className: 'code-title', html: 'Module: ' + section.name })
+        sectionName = createEl('h2', { className: 'code-title', html: section.name })
         codeWrap.appendChild(sectionName)
       }
       if (section.desc) {

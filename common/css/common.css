@@ -31,13 +31,18 @@ button {
   padding: 0 .1rem;
   border: 1px solid;
   border-radius: .03rem;
-  font-size: .14rem;
+  font-size: inherit;
   background: transparent;
 }
 
 a, button {
   opacity: .8;
   text-decoration: none;
+}
+
+input, textarea, select {
+  font-size: inherit;
+  color: inherit;
 }
 
 a {
