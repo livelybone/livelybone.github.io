@@ -69,12 +69,11 @@ a:hover, button:hover {
   position: relative;
   width: calc(100% - .3rem);
   margin: .2rem auto 0;
-  padding: 0 0 0 .2rem;
+  padding: 0 0 0 .4rem;
   line-height: .3rem;
   font-size: .18rem;
   font-weight: 500;
   color: #262f3a;
-  background: rgba(47, 158, 178, .05);
 }
 
 .root-h1:before {
@@ -83,8 +82,8 @@ a:hover, button:hover {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 2px;
-  background: #2fb9b2;
+  width: .5rem;
+  background: url('../../logo.png') no-repeat left .05rem center/.32rem auto;
 }
 
 .root-h {
