@@ -130,3 +130,9 @@ a:hover, button:hover {
 .code-title:nth-child(2) {
   margin-top: 0;
 }
+
+@media screen and (min-width: 1200px) and (orientation: landscape) {
+  .root-h1, .code-wrap, .app {
+    width: 1200px;
+  }
+}
