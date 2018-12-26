@@ -1,0 +1,72 @@
+.pagination {
+  font-size: .14rem;
+  color: #666;
+  white-space: nowrap;
+  overflow: hidden
+}
+
+.pagination .label {
+  float: left;
+  height: .28rem;
+  line-height: .28rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #999
+}
+
+.pagination .input {
+  box-sizing: border-box;
+  float: left;
+  height: .28rem;
+  padding: 0 .1rem;
+  margin: 0 .2rem 0 .1rem;
+  border: 1px solid #ddd;
+  border-radius: .03rem;
+  line-height: .26rem;
+  color: #666;
+  outline: none
+}
+
+.pagination .input:focus {
+  border-color: #3491c3
+}
+
+.pagination .page-btn {
+  box-sizing: border-box;
+  float: left;
+  min-width: .28rem;
+  height: .28rem;
+  line-height: .26rem;
+  padding: 0 4px;
+  margin: 0 0 0 .1rem;
+  border: 1px solid #ddd;
+  text-align: center;
+  cursor: pointer;
+  vertical-align: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none
+}
+
+.pagination .page-btn:first-child {
+  margin-left: 0;
+}
+
+.pagination .page-btn:hover {
+  background: rgba(52, 145, 195, 0.3)
+}
+
+.pagination .page-btn.disabled {
+  cursor: default;
+  background: rgba(0, 0, 0, 0.1);
+  border-color: rgba(221, 221, 221, 0.1)
+}
+
+.pagination .page-btn.active {
+  color: #fff;
+  background: #3491c3;
+  border-color: #3491c3
+}

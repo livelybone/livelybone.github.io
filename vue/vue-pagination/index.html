@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>VuePagination</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <script src="../../common/js/common.js"></script>
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <link rel="stylesheet" href="index.css">
+  <style>
+  body {
+    color: #999;
+  }
+
+  .wrap {
+    margin: .3rem 0 .2rem;
+  }
+
+  .wrap:first-child {
+    margin-top: .2rem;
+  }
+
+  .prev {
+    display: inline-block;
+    width: .06rem;
+    height: .06rem;
+    border-left: 1px solid #666;
+    border-top: 1px solid #666;
+    margin: 0 -.05rem .02rem 0;
+    transform: rotate(-45deg);
+  }
+
+  .next {
+    display: inline-block;
+    width: .06rem;
+    height: .06rem;
+    border-right: 1px solid #666;
+    border-bottom: 1px solid #666;
+    margin: 0 0 .02rem -.05rem;
+    transform: rotate(-45deg);
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">vue-pagination</h1>
+<section class="app">
+  <h2 class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/vue-pagination" target="_blank">
+      https://github.com/livelybone/vue-pagination
+    </a>
+  </div>
+  <h2 class="root-h">Example</h2>
+  <div class="example-wrap">
+    <div id="module"></div>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script src="../../common/js/vue.min.js"></script>
+<script src="https://unpkg.com/@livelybone/vue-pagination"></script>
+<script id="code">
+/*START*/
+new Vue({
+  el: '#module',
+  template: '<div class="wrap">' +
+  '   <div class="wrap">View the print logs in the console</div>' +
+  '   <div class="wrap">—— Know the total pages ——</div>' +
+  '   <pagination :config="config"' +
+  '               :input="{enable:false}"' +
+  '               @to="log(\'config\',$event)"/>' +
+  '   <div class="wrap">—— Do not know the total pages ——</div>' +
+  '   <pagination :noPage="true"' +
+  '               :config="noPageConfig"' +
+  '               :turnBtns="turnBtns"' +
+  '               :input="{text: \'To\', debonceTime: 2000}"' +
+  '               @to="log(\'noPageConfig\',$event)"/>' +
+  '</div>',
+  data: function () {
+    return {
+      config: {
+        pages: 100,
+        page: 1,
+        pageSize: 10,
+        maxPageBtn: 6
+      },
+      noPageConfig: {
+        page: 1,
+        pageSize: 10,
+        currPageSize: 10
+      },
+      turnBtns: {
+        prev: '<span class="prev"></span>',
+        next: '<span class="next"></span>'
+      }
+    }
+  },
+  methods: {
+    log: function (type, val) {
+      console.log(type, ' to: ', val)
+      this[type].page = val
+    }
+  },
+  components: { pagination: Pagination }
+})
+/*END*/
+</script>
+</body>
+</html>
