@@ -21,7 +21,11 @@ function setViewport(noScale) {
 }
 
 function getEl(selector) {
-  return document.querySelectorAll(selector)
+  try {
+    return document.querySelectorAll(selector)
+  } catch (e) {
+    return []
+  }
 }
 
 function createEl(tag, attrs) {
@@ -92,10 +96,14 @@ function createCodeFragment(codeSections, codeDealFn) {
       }
 
       if (section.renderId) {
-        const parent = getEl('#' + section.renderId)[0]
-        parent.appendChild(frag)
-        parent.className = parent.className ? parent.className + ' ' + 'code-wrap' : 'code-wrap'
-        codeRenderedCount++
+        var parent = getEl('#' + section.renderId)[0]
+        if (parent) {
+          parent.appendChild(frag)
+          parent.className = parent.className ? parent.className + ' ' + 'code-wrap' : 'code-wrap'
+          codeRenderedCount++
+        } else {
+          codeFragment.appendChild(frag)
+        }
       } else {
         codeFragment.appendChild(frag)
       }
@@ -115,7 +123,7 @@ function createCodeFragment(codeSections, codeDealFn) {
 setViewport(/noScale/i.test(location.href))
 
 window.addEventListener('DOMContentLoaded', function () {
-  const code = getEl('#code')[0]
+  var code = getEl('#code')[0]
   if (code) createCodeFragment(parseJsText(code.innerText), function (node) {
     if (hljs && hljs.highlightBlock) {
       hljs.configure({

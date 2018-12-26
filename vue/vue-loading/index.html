@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>VueLoading</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <script src="../../common/js/common.js"></script>
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <style>
+  .vue-input {
+    margin: .2rem .1rem 0 0;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">vue-loading</h1>
+<section class="app">
+  <h2 class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/vue-loading" target="_blank">
+      https://github.com/livelybone/vue-loading
+    </a>
+  </div>
+
+  <h2 class="root-h">Example</h2>
+  <div class="example-wrap">
+    <div id="module"></div>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script src="../../common/js/vue.min.js"></script>
+<script src="https://unpkg.com/@livelybone/vue-loading"></script>
+<script src="https://unpkg.com/@livelybone/vue-input"></script>
+<script id="code">
+/*START*/
+var size = '.4rem'
+var color = '#6caf90'
+var vueLoading = new Vue({
+  el: '#module',
+  template: '<div>' +
+  '   <loading :size="cSize" :color="cColor"/><br>' +
+  '   Size: <vue-input v-model="size" class="vue-input"/>' +
+  '   Color: <vue-input v-model="color" class="vue-input"/>' +
+  '</div>',
+  data: function () {
+    return {
+      size: size,
+      color: color
+    }
+  },
+  computed: {
+    cSize: function () {
+      if (+this.size || /^\d*(\.\d+)?(rem|em|px|pt)$/.test(this.size)) {
+        return size = this.size
+      }
+      return size
+    },
+    cColor: function () {
+      var that = this
+      var reg1 = /^#[0-9a-fA-F]{3,4}$/
+      var reg2 = /^#[0-9a-fA-F]{6}$/
+      var reg3 = /^#[0-9a-fA-F]{8}$/
+      var reg4 = /^rgba\(\s*(\d{1,2}|[01]\d{2}|2[0-4]\d|25[0-5])\s*,\s*(\d{1,2}|[01]\d{2}|2[0-4]\d|25[0-5])\s*,\s*(\d{1,2}|[01]\d{2}|2[0-4]\d|25[0-5])\s*,\s*\d*(\.\d+)?\s*\)$/
+      var reg5 = /^rgb\(\s*(\d{1,2}|[01]\d{2}|2[0-4]\d|25[0-5])\s*,\s*(\d{1,2}|[01]\d{2}|2[0-4]\d|25[0-5])\s*,\s*(\d{1,2}|[01]\d{2}|2[0-4]\d|25[0-5])\s*\)$/
+      var matched = [reg1, reg2, reg3, reg4, reg5].some(function (r) {
+        return r.test(that.color)
+      })
+      if (matched) {
+        return color = this.color
+      }
+      return color
+    }
+  },
+  components: { 'loading': VueLoading, 'vue-input': VueInput }
+})
+/*END*/
+</script>
+</body>
+</html>

@@ -51,7 +51,7 @@ var vueInput = new Vue({
   '   <button class="btn-turn" @click="turn">Turn to {{type}}</button>\n' +
   '</div>',
   data: function () {
-    const reg = /^-?/
+    var reg = /^-?/
     return {
       value: '',
       valid: true,
