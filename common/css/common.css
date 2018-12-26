@@ -33,6 +33,7 @@ button {
   border-radius: .03rem;
   font-size: inherit;
   background: transparent;
+  cursor: pointer;
 }
 
 a, button {
@@ -41,6 +42,7 @@ a, button {
 }
 
 input, textarea, select {
+  font-family: 'Helvetica Neue', 'Hiragino Sans GB', Helvetica, 'Microsoft Yahei', '微软雅黑', Arial, sans-serif;
   font-size: inherit;
   color: inherit;
 }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>VueInput</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <script src="../../common/js/common.js"></script>
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <style>
+  .error-text {
+    color: #ff5156;
+  }
+
+  .value, .error-text, .btn-turn {
+    margin: .1rem 0 0;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">vue-input</h1>
+<section class="app">
+  <h2 class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/vue-input" target="_blank">
+      https://github.com/livelybone/vue-input
+    </a>
+  </div>
+
+  <h2 class="root-h">Example</h2>
+  <div class="example-wrap">
+    <div id="module"></div>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script src="../../common/js/vue.min.js"></script>
+<script src="https://unpkg.com/@livelybone/vue-input"></script>
+<script id="code">
+/*START*/
+/*DESC: See <a href="https://github.com/livelybone/vue-input" target="_blank">README</a>*/
+var vueInput = new Vue({
+  el: '#module',
+  template: '<div>' +
+  '   <vue-input v-model="value" :config="config" @check="log" ref="input"/>' +
+  '   <div class="value">value: {{value}}</div>' +
+  '   <div v-if="!valid" class="error-text">value `{{value}}` is invalid</div>' +
+  '   <button class="btn-turn" @click="turn">Turn to {{type}}</button>\n' +
+  '</div>',
+  data: function () {
+    const reg = /^-?/
+    return {
+      value: '',
+      valid: true,
+      config: {
+        inputType: 'text',
+        placeholder: '',
+        validator: function (val) {
+          return /^-/.test(val)
+        },
+        /*['pre','suf'], timing of validator*/
+        validateType: 'pre',
+        /*Formatting when inputting*/
+        preFormatter: function (val) {
+          console.log('preFormatter', val)
+          return val.replace(reg, '-')
+        },
+        /*Formatting at the end of inputting*/
+        sufFormatter: function (val) {
+          console.log('sufFormatter', val)
+          return val.replace(reg, '')
+        },
+        maxlength: null,
+        readonly: false,
+        autocomplete: 'off',
+        autofocus: false,
+        disabled: false
+      }
+    }
+  },
+  computed: {
+    type: function () {
+      return this.config.inputType === 'text' ? 'textarea' : 'text'
+    }
+  },
+  methods: {
+    log: function (ev) {
+      console.log('check', ev)
+      this.valid = ev.valid
+    },
+    turn: function () {
+      this.config.inputType = this.type
+    }
+  },
+  components: { 'vue-input': VueInput }
+})
+/*END*/
+</script>
+</body>
+</html>
