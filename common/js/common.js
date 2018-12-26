@@ -42,9 +42,9 @@ function createEl(tag, attrs) {
 
 function parseJsText(jsText) {
   var reg = {
-    renderId: /\/\*RENDER_ID:\s*(([^\n/*]*(\/(?!\*))*(\*(?!\/))*)*)\s*\*\//,
-    name: /\/\*NAME:\s*(([^\n/*]*(\/(?!\*))*(\*(?!\/))*)*)\s*\*\//,
-    desc: /\/\*DESC:\s*(([^\n/*]*(\/(?!\*))*(\*(?!\/))*)*)\s*\*\//
+    renderId: /\/\*RENDER_ID:\s*(([^\n/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//,
+    name: /\/\*NAME:\s*(([^\n/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//,
+    desc: /\/\*DESC:\s*(([^\n/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//
   }
 
   var arr = jsText.split(/\/\*START\*\/|\/\*END\*\//)
