@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>VueTable</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <script src="../../common/js/common.js"></script>
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <link rel="stylesheet" href="index.css">
+  <style>
+  .table-base,
+  .table-extend {
+    border-collapse: collapse;
+    /*border: 1px solid #c2ccdc;*/
+  }
+
+  .table-base .td,
+  .table-base .th,
+  .table-extend .td,
+  .table-extend .th {
+    border: none !important;
+    white-space: nowrap;
+  }
+
+  .table-base .td,
+  .table-base .th {
+    height: .34rem !important;
+  }
+
+  .table-base img,
+  .table-extend img {
+    display: block;
+    max-width: 100%;
+  }
+
+  .column-resize {
+    background: #fff;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">vue-table</h1>
+<section class="app">
+  <h2 class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/vue-table" target="_blank">
+      https://github.com/livelybone/vue-table
+    </a>
+  </div>
+
+  <h2 class="root-h">TableBase</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3>
+    <div id="table-base"></div>
+    <div id="table-base-code"></div>
+  </div>
+
+  <h2 class="root-h">TableExtend</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3>
+    <p class="root-desc">
+      Scrollable: You can custom the
+      scrollbarProps({isMobile&lt;Boolean&gt;, maxHeight&lt;String | Number&gt;}, see in
+      <a href="https://github.com/livelybone/vue-scrollbar-live"
+         target="_blank">vue-scrollbar-live</a>
+      ) to realize this feature
+    </p>
+    <p class="root-desc">
+      Resizable: You can resize the table by drag the white boundaries between `th`
+    </p>
+    <div id="table-extend"></div>
+    <div id="table-extend-code"></div>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script src="../../common/js/vue.min.js"></script>
+<script src="https://unpkg.com/@livelybone/vue-table"></script>
+<script id="code">
+console.log(VueTable)
+var isMobile = /Android|webOS|iPhone|iPod|iPad|BlackBerry|Windows Phone/i.test(navigator.userAgent)
+
+var tableData = [
+  { name: 'lzp', age: '24', sex: 'male' },
+  { name: 'thy', age: '<img src="./home.png">', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' },
+  { name: 'thy', age: '24', sex: 'female' }
+]
+
+/*START*/
+/*RENDER_ID:table-base-code*/
+/*NAME: Code*/
+new Vue({
+  el: '#table-base',
+  template: '<vue-table :heads="heads"' +
+  '                     :data="data"' +
+  '                     :headTrStyle="headTrStyle"' +
+  '                     :trStyle="trStyle"' +
+  '                     :evenTrStyle="evenTrStyle"' +
+  '                     @clickTr="log"' +
+  '                     @clickTd="log"' +
+  '                     @clickTh="log"></vue-table>',
+  data: function () {
+    return {
+      isMobile: isMobile,
+      heads: [
+        {
+          name: '姓名',
+          alias: 'name',
+          style: { textAlign: 'left' },
+          tdStyle: { textAlign: 'right' },
+          formatter: function (item, alias) {
+            return item[alias] + ' - x'
+          }
+        },
+        { name: '年龄', alias: 'age' },
+        { name: '性别', alias: 'sex' }
+      ],
+      data: tableData.slice(0, 5),
+      headTrStyle: { background: '#f8f9fb' },
+      trStyle: { background: '#fefefe' },
+      evenTrStyle: { background: '#fafafa' }
+    }
+  },
+  methods: {
+    log: function (val) {
+      console.log(val)
+    }
+  },
+  components: { 'vue-table': VueTable.TableBase }
+})
+/*END*/
+
+/*START*/
+/*RENDER_ID: table-extend-code*/
+/*NAME: Code*/
+new Vue({
+  el: '#table-extend',
+  template: '<vue-table :heads="heads"' +
+  '                     :data="data"' +
+  '                     :headTrStyle="headTrStyle"' +
+  '                     :trStyle="trStyle"' +
+  '                     :evenTrStyle="evenTrStyle"' +
+  '                     :scrollbarProps="{isMobile:isMobile, maxHeight:\'50vh\'}"' +
+  '                     @clickTr="log"' +
+  '                     @clickTd="log"' +
+  '                     @clickTh="log"></vue-table>',
+  data: function () {
+    return {
+      isMobile: isMobile,
+      heads: [
+        {
+          name: '姓名',
+          alias: 'name',
+          style: { textAlign: 'left' },
+          tdStyle: { textAlign: 'right' },
+          formatter: function (item, alias) {
+            return item[alias] + ' - x'
+          }
+        },
+        { name: '年龄', alias: 'age', width: isMobile ? 400 : 1000 },
+        { name: '性别', alias: 'sex' }
+      ],
+      data: tableData,
+      headTrStyle: { background: '#f8f9fb' },
+      trStyle: { background: '#fefefe' },
+      evenTrStyle: { background: '#fafafa' }
+    }
+  },
+  methods: {
+    log: function (val) {
+      console.log(val)
+    }
+  },
+  components: { 'vue-table': VueTable.TableExtend }
+})
+/*END*/
+</script>
+</body>
+</html>
