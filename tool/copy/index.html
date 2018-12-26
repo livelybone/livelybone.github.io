@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>copy -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <script src="../../common/js/common.js"></script>
+  <script src="https://unpkg.com/@livelybone/copy"></script>
+  <style type="text/css">
+  .btn-groups {
+    margin: 0 0 -.15rem;
+  }
+
+  button {
+    /*margin: 0 .15rem .15rem 0;*/
+  }
+
+  @media (orientation: portrait) {
+    button {
+      width: 100%;
+    }
+  }
+
+  .gray {
+    border-color: #333;
+    color: #333;
+  }
+
+  .green {
+    border-color: #3DBD7D;
+    color: #3DBD7D;
+  }
+
+  .yellow {
+    border-color: #FF6600;
+    color: #FF6600;
+  }
+
+  .red {
+    border-color: #FA7377;
+    color: #FA7377;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">Copy</h1>
+<section class="app">
+  <h2 class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/copy" target="_blank">
+      https://github.com/livelybone/copy
+    </a>
+  </div>
+
+  <h2 class="root-h">copyDom</h2>
+  <div class="example-wrap">
+    <img id="copy-img"
+         src="./timg.jpg"
+         alt="">
+    <button style="margin-top: .1rem" onclick="copyImg()">Copy Img</button>
+    <div id="copy-dom-code"></div>
+  </div>
+
+  <h2 class="root-h">copyText</h2>
+  <div class="example-wrap">
+    <button onclick="copyText()">Copy Text: 'My name is livelybone'</button>
+    <div id="copy-text-code"></div>
+  </div>
+
+  <h2 class="root-h">objectSimpleCopy</h2>
+  <div class="example-wrap">
+    <div id="obj-simple-copy-code"></div>
+  </div>
+
+  <h2 class="root-h">objectDeepCopy</h2>
+  <div class="example-wrap">
+    <div id="obj-deep-copy-code"></div>
+  </div>
+
+  <h2 class="root-h">objectDeepMerge</h2>
+  <div class="example-wrap">
+    <div id="obj-deep-merge-code"></div>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script type="text/javascript" id="code">
+/*START*/
+/*RENDER_ID: copy-dom-code*/
+/*NAME: Code*/
+/*DESC: The url of image be copied should have a right extension, or the copy function will do not work*/
+function copyImg() {
+  Copy.copyDom(getEl('#copy-img')[0])
+  alert('Copy success!')
+}
+
+/*END*/
+
+/*START*/
+/*RENDER_ID: copy-text-code*/
+/*NAME: Code*/
+function copyText() {
+  Copy.copyText('My name is livelybone')
+  alert('Copy success!')
+}
+
+/*END*/
+
+/*START*/
+/*RENDER_ID: obj-simple-copy-code*/
+/*NAME: Code*/
+/*DESC: Can not copy object that has circular structure. See results in console*/
+!(function () {
+  var obj = {
+    name: 'livelybone',
+    age: 26
+  }
+  var obj1 = Copy.objectSimpleCopy(obj)
+  console.log('---- objectSimpleCopy ----')
+  console.log('> obj: ', obj)
+  console.log('> obj1: ', obj1)
+  console.log('> whether obj is equal to obj1: ', obj === obj1)
+})()
+/*END*/
+
+/*START*/
+/*RENDER_ID: obj-deep-copy-code*/
+/*NAME: Code*/
+/*DESC: Can copy object that has circular structure. See results in console*/
+!(function () {
+  var obj = {
+    name: 'livelybone',
+    age: 26
+  }
+  obj.quote = obj
+  var obj1 = Copy.objectDeepCopy(obj)
+  console.log('---- objectDeepCopy ----')
+  console.log('> obj: ', obj)
+  console.log('> obj1: ', obj1)
+  console.log('> whether obj is equal to obj1: ', obj === obj1)
+  console.log('> whether obj.quote is equal to obj1.quote: ', obj.quote === obj1.quote)
+  console.log('> whether obj1 is equal to obj1.quote: ', obj1.quote === obj1)
+})()
+/*END*/
+
+/*START*/
+/*RENDER_ID: obj-deep-merge-code*/
+/*NAME: Code*/
+/*DESC: See results in console*/
+!(function () {
+  var obj = {
+    name: 'livelybone',
+    age: 26,
+    bwh: [2, 1, 3],
+    lover: 'Yanci'
+  }
+
+  var obj1 = {
+    name: 'Yanci',
+    age: 26,
+    bwh: [1, 2, 3],
+    height: 160,
+    lover: 'livelybone'
+  }
+  var obj2 = Copy.objectDeepMerge({}, obj, obj1)
+  console.log('---- objectSimpleCopy ----')
+  console.log('> obj: ', obj)
+  console.log('> obj1: ', obj1)
+  console.log('> obj2: ', obj2)
+})()
+/*END*/
+</script>
+</body>
+</html>
