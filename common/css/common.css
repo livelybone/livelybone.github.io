@@ -120,6 +120,7 @@ a:hover, button:hover {
 }
 
 .example-wrap {
+  position: relative;
   padding: 1em;
   border: 1px solid #eaefef;
   border-radius: .03rem;

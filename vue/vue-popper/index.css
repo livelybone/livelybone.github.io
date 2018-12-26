@@ -1,0 +1,113 @@
+.vue-popper {
+  border: 1px solid #c2ccdc;
+  border-radius: .03rem;
+  background: #fff
+}
+
+.vue-popper[x-placement^=top] {
+  margin-bottom: .1rem
+}
+
+.vue-popper[x-placement^=top] .arrow {
+  position: absolute;
+  bottom: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-bottom: 0;
+  border-top-color: #c2ccdc
+}
+
+.vue-popper[x-placement^=top] .arrow:before {
+  content: '';
+  position: absolute;
+  bottom: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-bottom: 0;
+  border-top-color: #fff;
+  left: -.06rem;
+  bottom: 1px
+}
+
+.vue-popper[x-placement^=bottom] {
+  margin-top: .1rem
+}
+
+.vue-popper[x-placement^=bottom] .arrow {
+  position: absolute;
+  top: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-top: 0;
+  border-bottom-color: #c2ccdc
+}
+
+.vue-popper[x-placement^=bottom] .arrow:before {
+  content: '';
+  position: absolute;
+  top: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-top: 0;
+  border-bottom-color: #fff;
+  left: -.06rem;
+  top: 1px
+}
+
+.vue-popper[x-placement^=left] {
+  margin-right: .1rem
+}
+
+.vue-popper[x-placement^=left] .arrow {
+  position: absolute;
+  right: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-right: 0;
+  border-left-color: #c2ccdc
+}
+
+.vue-popper[x-placement^=left] .arrow:before {
+  content: '';
+  position: absolute;
+  right: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-right: 0;
+  border-left-color: #fff;
+  top: -.06rem;
+  right: 1px
+}
+
+.vue-popper[x-placement^=right] {
+  margin-left: .1rem
+}
+
+.vue-popper[x-placement^=right] .arrow {
+  position: absolute;
+  left: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-left: 0;
+  border-right-color: #c2ccdc
+}
+
+.vue-popper[x-placement^=right] .arrow:before {
+  content: '';
+  position: absolute;
+  left: -.06rem;
+  width: 0;
+  height: 0;
+  border: .06rem solid transparent;
+  border-left: 0;
+  border-right-color: #fff;
+  top: -.06rem;
+  left: 1px
+}
