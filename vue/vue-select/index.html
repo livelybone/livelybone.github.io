@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>vue-select -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <link rel="stylesheet" href="index.css">
+  <script src="../../common/js/common.js"></script>
+  <style>
+  .select {
+    display: inline-block;
+    width: 3rem;
+    vertical-align: top;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">vue-select</h1>
+<section class="app">
+  <h2 class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/vue-select" target="_blank">
+      https://github.com/livelybone/vue-select
+    </a>
+  </div>
+
+  <h2 class="root-h">SelectBase</h2>
+  <div class="example-wrap">
+    <div id="normal"></div>
+    <div id="normal-code"></div>
+  </div>
+
+  <h2 class="root-h">SelectMulti</h2>
+  <div class="example-wrap">
+    <div id="multi"></div>
+    <div id="multi-code"></div>
+  </div>
+
+  <h2 class="root-h">Cascader</h2>
+  <div class="example-wrap">
+    <div id="cascader"></div>
+    <div id="cascader-code"></div>
+  </div>
+
+  <h2 class="root-h">CascaderMulti</h2>
+  <div class="example-wrap">
+    <div id="cascader-multi"></div>
+    <div id="cascader-multi-code"></div>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script src="../../common/js/vue.min.js"></script>
+<script src="https://unpkg.com/@livelybone/vue-select"></script>
+<script type="text/javascript" id="code">
+console.log(VueSelect)
+var isMobile = /Android|webOS|iPhone|iPod|iPad|BlackBerry|Windows Phone/i.test(navigator.userAgent)
+var options = [
+  { name: 'place 1', value: 1 },
+  { name: 'place 2', value: 2 },
+  { name: 'place 3', value: 3 },
+  { name: 'place 4', value: 4 },
+  { name: 'place 5', value: 5 },
+  { name: 'place 6', value: 6 },
+  { name: 'place 7', value: 7 },
+  { name: 'place 8', value: 8 },
+  { name: 'place 9', value: 9 },
+  { name: 'place 10', value: 10 },
+  { name: 'place 11', value: 11 },
+  { name: 'place 12', value: 12 },
+  { name: 'place 13', value: 13 },
+  { name: 'place 14', value: 14 },
+  { name: 'place 15', value: 15 },
+  { name: 'place 16', value: 16 },
+  { name: 'place 17', value: 17 }
+]
+var options1 = [
+  {
+    name: 'place 1', value: 1, children: [
+      {
+        name: 'place 2', value: 2, children: [
+          { name: 'place 5', value: 5 },
+          { name: 'place 6', value: 6 },
+          { name: 'place 7', value: 7 }
+        ]
+      },
+      { name: 'place 3', value: 3 },
+      { name: 'place 4', value: 4 }
+    ]
+  },
+  {
+    name: 'place 8', value: 8, children: [
+      {
+        name: 'place 9', value: 9, children: [
+          { name: 'place 12', value: 12 },
+          { name: 'place 13', value: 13 },
+          { name: 'place 14', value: 14 }
+        ]
+      },
+      { name: 'place 10', value: 10 },
+      { name: 'place 11', value: 11 }
+    ]
+  },
+  {
+    name: 'place 15', value: 15, children: [
+      { name: 'place 16', value: 16 }
+    ]
+  },
+  { name: 'place 17', value: 17 }
+]
+
+/*START*/
+/*DESC:popperConfig, see in <a href="https://github.com/livelybone/vue-popper" target="_blank">@livelybone/vue-popper</a>*/
+var popperProps = {
+  popperOptions: {
+    modifiers: {
+      preventOverflow: { padding: 20 }
+    }
+  }
+}
+/*END*/
+
+/*START*/
+/*RENDER_ID: normal-code*/
+/*NAME: Code*/
+new Vue({
+  el: '#normal',
+  template: '<vue-select class="select"' +
+  '                      v-model="value"' +
+  '                      :options="showOptions"' +
+  '                      :canSearch="true"' +
+  '                      :popperProps="popperProps"' +
+  '                      :scrollbarProps="{isMobile:isMobile, maxHeight:\'30vh\'}"' +
+  '                      @search="log">No Result</vue-select>',
+  data: function () {
+    return {
+      isMobile: isMobile,
+      value: 1,
+      options: options,
+      keyword: '',
+      popperProps: popperProps
+    }
+  },
+  computed: {
+    showOptions: function () {
+      return this.keyword ? this.options.filter(this.filter) : this.options
+    }
+  },
+  methods: {
+    log: function (val) {
+      console.log(val)
+      this.keyword = val
+    },
+    filter: function (op) {
+      return op.name.toString().indexOf(this.keyword) > -1
+    }
+  },
+  components: { 'vue-select': VueSelect.SelectBase }
+})
+/*END*/
+
+/*START*/
+/*RENDER_ID: multi-code*/
+/*NAME: Code*/
+new Vue({
+  el: '#multi',
+  template: '<vue-select-multi class="select"' +
+  '                            v-model="value"' +
+  '                            :options="showOptions"' +
+  '                            :popperProps="popperProps"' +
+  '                            :canSearch="false"' +
+  '                            :scrollbarProps="{isMobile:isMobile, maxHeight:\'30vh\'}"' +
+  '                            @search="log">No Result</vue-select-multi>',
+  data: function () {
+    return {
+      isMobile: isMobile,
+      value: options.map(function (o) {
+        return o.value
+      }),
+      options: options,
+      keyword: '',
+      popperProps: popperProps
+    }
+  },
+  computed: {
+    showOptions: function () {
+      return this.keyword ? this.options.filter(this.filter) : this.options
+    }
+  },
+  methods: {
+    log: function (val) {
+      console.log(val)
+      this.keyword = val
+    },
+    filter: function (op) {
+      return op.name.toString().indexOf(this.keyword) > -1
+    }
+  },
+  components: { 'vue-select-multi': VueSelect.SelectMulti }
+})
+/*END*/
+
+/*START*/
+/*RENDER_ID: cascader-code*/
+/*NAME: Code*/
+new Vue({
+  el: '#cascader',
+  template: '<cascader class="select"' +
+  '                    changeOnSelect' +
+  '                    v-model="value"' +
+  '                    expandType="hover"' +
+  '                    :options="showOptions"' +
+  '                    :popperProps="popperProps"' +
+  '                    :canSearch="true"' +
+  '                    :scrollbarProps="{isMobile:isMobile, maxHeight:\'30vh\'}"' +
+  '                    @search="log">No Result</cascader>',
+  data: function () {
+    return {
+      isMobile: isMobile,
+      value: [1, 2],
+      options: options1,
+      keyword: '',
+      popperProps: popperProps
+    }
+  },
+  computed: {
+    showOptions: function () {
+      return this.keyword ? this.options.filter(this.filter) : this.options
+    }
+  },
+  watch: {
+    value: function (val) {
+      console.log(val)
+    },
+    options: function (val) {
+      console.log(val)
+    }
+  },
+  methods: {
+    log: function (val) {
+      console.log(val)
+      this.keyword = val
+    },
+    filter: function (op) {
+      return op.name.toString().indexOf(this.keyword) > -1
+    }
+  },
+  components: { 'cascader': VueSelect.Cascader }
+})
+/*END*/
+
+/*START*/
+/*RENDER_ID: cascader-multi-code*/
+/*NAME: Code*/
+new Vue({
+  el: '#cascader-multi',
+  template: '<cascader-multi class="select"' +
+  '                          v-model="value"' +
+  '                          expandType="click"' +
+  '                          :options="showOptions"' +
+  '                          :popperProps="popperProps"' +
+  '                          :canSearch="true"' +
+  '                          :scrollbarProps="{isMobile:isMobile, maxHeight:\'30vh\'}"' +
+  '                          @search="log">No Result</cascader-multi>',
+  data: function () {
+    return {
+      isMobile: isMobile,
+      value: [[1, 2, 5], [8, 9, 12], [15, 16], [1, 3]],
+      options: options1,
+      keyword: '',
+      popperProps: popperProps
+    }
+  },
+  computed: {
+    showOptions: function () {
+      return this.keyword ? this.options.filter(this.filter) : this.options
+    }
+  },
+  watch: {
+    value: function (val) {
+      console.log(val)
+    },
+    options: function (val) {
+      console.log(val)
+    }
+  },
+  methods: {
+    log: function (val) {
+      console.log(val)
+      this.keyword = val
+    },
+    filter: function (op) {
+      return op.name.toString().indexOf(this.keyword) > -1
+    }
+  },
+  components: { 'cascader-multi': VueSelect.CascaderMulti }
+})
+/*END*/
+</script>
+</body>
+</html>
