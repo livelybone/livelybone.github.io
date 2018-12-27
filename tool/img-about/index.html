@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>img-about -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <script src="../../common/js/common.js"></script>
+  <!--<script src="https://unpkg.com/img-about"></script>-->
+  <script src="index.js"></script>
+  <style type="text/css">
+  .btn-groups {
+    margin: 0 0 -.15rem;
+  }
+
+  button {
+    /*margin: 0 .15rem .15rem 0;*/
+  }
+
+  @media (orientation: portrait) {
+    button {
+      width: 100%;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  textarea {
+    width: 2rem;
+    height: 1rem;
+    padding: .1rem;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">ImgAbout</h1>
+<section class="app">
+  <h2 id="Repository" class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/img-about" target="_blank">
+      https://github.com/livelybone/img-about
+    </a>
+  </div>
+
+  <h2 id="ImageCopy" class="root-h">ImageCopy</h2>
+  <div class="example-wrap">
+    <img id="img" src="../../common/images/naruto.jpeg"/>
+    <button style="display: block; margin-top: .1rem" onclick="copyImg()">Copy Image</button>
+    <div id="copy-img-code"></div>
+  </div>
+  <canvas id="canvas" width="200" height="200"></canvas>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script type="text/javascript" id="code">
+/*CATALOGUE: Repository, ImageCopy*/
+
+getEl('#img')[0].onload = function () {
+  // getEl('#canvas')[0].getContext('2d').drawImage(getEl('#img')[0], 0, 0)
+  getEl('#canvas')[0].getContext('2d').fillStyle = '#000'
+  getEl('#canvas')[0].getContext('2d').fillText('sdfsdfsdf', 50, 50)
+}
+
+/*START*/
+/*RENDER_ID: copy-img-code*/
+/*NAME: Code*/
+function copyImg() {
+  ImgAbout.imageCopy(getEl('#img')[0])
+  alert('Copy success!')
+}
+
+/*END*/
+</script>
+</body>
+</html>

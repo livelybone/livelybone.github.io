@@ -86,7 +86,7 @@ function delClass(el, className) {
   return true
 }
 
-function toggleClass(el, className, otherConditions) {
+function toggleClass(el, className) {
   var reg = new RegExp('(^|\\s*)' + className + '(\\s*|$)')
   var reg1 = new RegExp('(^|\\s*)' + className + '(\\s*|$)', 'g')
   if (reg.test(el.className)) {
@@ -102,9 +102,12 @@ function expandCatalogue(ev) {
   var currentTarget = event.currentTarget
   var catalog = getEl('#root-catalogue')[0]
   var isWindowClick = currentTarget === window && !catalog.contains(target)
-  var isItemClick = currentTarget !== window && !/(^|\s*)root-catalogue-item(\s*|$)/.test(target.className)
-  if (isWindowClick || isItemClick) {
-    toggleClass(catalog, 'expand')
+  var isNotItemClick = currentTarget !== window && !/(^|\s*)root-catalogue-item(\s*|$)/.test(target.className)
+  if (isWindowClick) {
+    delClass(catalog, 'expand')
+  }
+  if (isNotItemClick) {
+    addClass(catalog, 'expand')
   }
 }
 
