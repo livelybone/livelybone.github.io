@@ -56,6 +56,15 @@
     <div id="copy-dom-code"></div>
   </div>
 
+  <h2 id="CopyImage" class="root-h">CopyImage</h2>
+  <div class="example-wrap">
+    <img id="img"
+         src="https://b-ssl.duitang.com/uploads/item/201406/27/20140627102052_KB3eJ.thumb.700_0.jpeg"
+         alt="">
+    <button style="display: block; margin-top: .1rem" onclick="copyImg()">Copy Image</button>
+    <div id="copy-img-code"></div>
+  </div>
+
   <h2 id="CopyText" class="root-h">CopyText</h2>
   <div class="example-wrap">
     <button onclick="copyText()">Copy Text: 'My name is livelybone'</button>
@@ -80,13 +89,23 @@
 
 <script src="../../common/js/highlight.min.js"></script>
 <script type="text/javascript" id="code">
-/*CATALOGUE: Repository, CopyDom, CopyText, ObjectSimpleCopy, ObjectDeepCopy, ObjectDeepMerge*/
+/*CATALOGUE: Repository, CopyDom, CopyImage, CopyText, ObjectSimpleCopy, ObjectDeepCopy, ObjectDeepMerge*/
 
 /*START*/
 /*RENDER_ID: copy-dom-code*/
 /*NAME: Code*/
 function copyDom() {
   Copy.copyDom(getEl('#textarea')[0])
+  alert('Copy success!')
+}
+
+/*END*/
+
+/*START*/
+/*RENDER_ID: copy-img-code*/
+/*NAME: Code*/
+function copyImg() {
+  Copy.copyDom(getEl('#img')[0])
   alert('Copy success!')
 }
 
