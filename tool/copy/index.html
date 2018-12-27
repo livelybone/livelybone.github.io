@@ -47,8 +47,14 @@
   }
 
   img {
-    display: block;
     max-width: 100%;
+    vertical-align: middle;
+  }
+
+  textarea {
+    width: 2rem;
+    height: 1rem;
+    padding: .1rem;
   }
   </style>
 </head>
@@ -64,10 +70,9 @@
 
   <h2 class="root-h">copyDom</h2>
   <div class="example-wrap">
-    <img id="copy-img"
-         src="./timg.jpg"
-         alt="">
-    <button style="margin-top: .1rem" onclick="copyImg()">Copy Img</button>
+    <textarea id="textarea">My name is livelybone, 26 years old, 168cm, and my lover is Yanci
+    </textarea>
+    <button style="display: block; margin-top: .1rem" onclick="copyDom()">Copy Dom</button>
     <div id="copy-dom-code"></div>
   </div>
 
@@ -98,9 +103,8 @@
 /*START*/
 /*RENDER_ID: copy-dom-code*/
 /*NAME: Code*/
-/*DESC: The url of image be copied should have a right extension, or the copy function will do not work*/
-function copyImg() {
-  Copy.copyDom(getEl('#copy-img')[0])
+function copyDom() {
+  Copy.copyDom(getEl('#textarea')[0])
   alert('Copy success!')
 }
 
@@ -173,7 +177,7 @@ function copyText() {
     lover: 'livelybone'
   }
   var obj2 = Copy.objectDeepMerge({}, obj, obj1)
-  console.log('---- objectSimpleCopy ----')
+  console.log('---- objectDeepMerge ----')
   console.log('> obj: ', obj)
   console.log('> obj1: ', obj1)
   console.log('> obj2: ', obj2)

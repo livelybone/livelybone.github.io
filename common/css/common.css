@@ -112,6 +112,7 @@ a:hover, button:hover {
 
 .root-desc {
   margin: 0 0 .1rem;
+  line-height: .22rem;
 }
 
 .other-code-wrap, .app {
@@ -146,6 +147,18 @@ a:hover, button:hover {
 
 .code-section {
 
+}
+
+.font-main {
+  color: #42b983;
+}
+
+.font-warn {
+  color: #d37a4e;
+}
+
+.font-error{
+  color: #d33750;
 }
 
 @media screen and (min-width: 1200px) and (orientation: landscape) {

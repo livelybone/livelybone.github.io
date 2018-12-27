@@ -44,7 +44,7 @@ function parseJsText(jsText) {
   var reg = {
     renderId: /\/\*RENDER_ID:\s*(([^\n/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//,
     name: /\/\*NAME:\s*(([^\n/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//,
-    desc: /\/\*DESC:\s*(([^\n/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//
+    desc: /\/\*DESC:\s*(([^/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//
   }
 
   var arr = jsText.split(/\/\*START\*\/|\/\*END\*\//)
@@ -57,7 +57,7 @@ function parseJsText(jsText) {
     .map(function (content) {
       var renderId = (content.match(reg.renderId) || [, ''])[1]
       var name = (content.match(reg.name) || [, 'default'])[1]
-      var desc = (content.match(reg.desc) || [, ''])[1]
+      var desc = (content.match(reg.desc) || [, ''])[1].replace(/\n/g, '<br>')
       return {
         renderId: renderId,
         name: name,
