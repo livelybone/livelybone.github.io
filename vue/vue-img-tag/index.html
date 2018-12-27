@@ -42,21 +42,21 @@
 <body>
 <h1 class="root-h1">vue-img-tag</h1>
 <section class="app">
-  <h2 class="root-h">Repository</h2>
+  <h2 id="Repository" class="root-h">Repository</h2>
   <div class="root-content-wrap">
     <a href="https://github.com/livelybone/vue-img-tag" target="_blank">
       https://github.com/livelybone/vue-img-tag
     </a>
   </div>
 
-  <h2 class="root-h">Normal</h2>
+  <h2 id="Normal-Apply" class="root-h">Normal Apply</h2>
   <div class="example-wrap">
     <h3 class="root-module-title">Example</h3>
-    <div id="normal"></div>
+    <div id="nor"></div>
     <div id="normal-code"></div>
   </div>
 
-  <h2 class="root-h">Input file</h2>
+  <h2 id="Input-File" class="root-h">Input file</h2>
   <div class="example-wrap">
     <h3 class="root-module-title">Example</h3>
     <p class="root-desc">Just for showing input file</p>
@@ -65,7 +65,7 @@
     <div id="file-code"></div>
   </div>
 
-  <h2 class="root-h">Lazy load</h2>
+  <h2 id="Lazy-Load" class="root-h">Lazy load</h2>
   <div class="example-wrap lazy">
     <h3 class="root-module-title">Example</h3>
     <div id="lazy"></div>
@@ -79,11 +79,13 @@
 <script src="https://unpkg.com/vue-img-tag"></script>
 <script id="code">
 console.log(VueImgTag)
+/*CATALOGUE: Repository, Normal-Apply, Input-File, Lazy-Load*/
+
 /*START*/
 /*RENDER_ID: normal-code*/
 /*NAME: Code*/
 new Vue({
-  el: '#normal',
+  el: '#nor',
   template: '<img-tag class="img-tag"' +
   '                   loadingImg="./loading.gif"' +
   '                   errorImg="./error.jpg"' +

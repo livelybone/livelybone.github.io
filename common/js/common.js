@@ -66,9 +66,77 @@ function parseJsText(jsText) {
           .replace(reg.renderId, '')
           .replace(reg.name, '')
           .replace(reg.desc, '')
-          .replace(/((^\n*)|(\n*$))/, '')
+          .replace(/((^\n*)|(\n*$))/g, '')
       }
     })
+}
+
+function addClass(el, className) {
+  var reg = new RegExp('(^|\\s*)' + className + '(\\s*|$)')
+  if (reg.test(el.className)) return false
+  el.className += ' ' + className
+  return true
+}
+
+function delClass(el, className) {
+  var reg = new RegExp('(^|\\s*)' + className + '(\\s*|$)')
+  var reg1 = new RegExp('(^|\\s*)' + className + '(\\s*|$)', 'g')
+  if (!reg.test(el.className)) return false
+  el.className = el.className.replace(reg1, '')
+  return true
+}
+
+function toggleClass(el, className, otherConditions) {
+  var reg = new RegExp('(^|\\s*)' + className + '(\\s*|$)')
+  var reg1 = new RegExp('(^|\\s*)' + className + '(\\s*|$)', 'g')
+  if (reg.test(el.className)) {
+    el.className = el.className.replace(reg1, '')
+  } else {
+    el.className += ' ' + className
+  }
+}
+
+function expandCatalogue(ev) {
+  var event = (ev || window.event)
+  var target = event.target
+  var currentTarget = event.currentTarget
+  var catalog = getEl('#root-catalogue')[0]
+  var isWindowClick = currentTarget === window && !catalog.contains(target)
+  var isItemClick = currentTarget !== window && !/(^|\s*)root-catalogue-item(\s*|$)/.test(target.className)
+  if (isWindowClick || isItemClick) {
+    toggleClass(catalog, 'expand')
+  }
+}
+
+function generatorCatalogue(jsText) {
+  var reg = /\/\*CATALOGUE:\s*(([^/*]?(\/(?!\*))?(\*(?!\/))?)*)\s*\*\//
+  var catalogue = (jsText.match(reg) || [, ''])[1]
+  if (catalogue) {
+    var arr = catalogue.split(/[\s\n]*,[\s\n]*/)
+    var catalog = createEl('aside', {
+      className: 'root-catalogue',
+      id: 'root-catalogue',
+      html: '<h2 class="root-catalogue-h"><span class="root-catalogue-h-text">Catalogue</span></h2>',
+      onclick: 'expandCatalogue()'
+    })
+    var items = createEl('div', { className: 'root-catalogue-items' })
+    arr.forEach(function (item) {
+      items.appendChild(createEl('a', {
+        className: 'root-catalogue-item',
+        text: item,
+        href: '#' + item
+      }))
+    })
+    catalog.appendChild(items)
+    document.body.appendChild(catalog)
+
+    var f = function (el) {
+      addClass(el, 'padding')
+    }
+    Array.prototype.forEach.call(getEl('.root-h1'), f)
+    Array.prototype.forEach.call(getEl('.app'), f)
+    Array.prototype.forEach.call(getEl('.other-code-wrap'), f)
+  }
 }
 
 function createCodeFragment(codeSections, codeDealFn) {
@@ -123,13 +191,27 @@ function createCodeFragment(codeSections, codeDealFn) {
 setViewport(/noScale/i.test(location.href))
 
 window.addEventListener('DOMContentLoaded', function () {
-  var code = getEl('#code')[0]
-  if (code) createCodeFragment(parseJsText(code.innerText), function (node) {
-    if (hljs && hljs.highlightBlock) {
-      hljs.configure({
-        languages: ['javascript']
-      })
-      hljs.highlightBlock(node)
-    }
+  /*Add click handler to `root-h1`*/
+  Array.prototype.forEach.call(getEl('.root-h1'), function (el) {
+    el.addEventListener('click', function (e) {
+      window.location.href = '/'
+    })
   })
+
+  var code = getEl('#code')[0]
+  if (code) {
+    createCodeFragment(parseJsText(code.innerText), function (node) {
+      if (hljs && hljs.highlightBlock) {
+        hljs.configure({
+          languages: ['javascript']
+        })
+        hljs.highlightBlock(node)
+      }
+    })
+    generatorCatalogue(code.innerText)
+
+    if (window.contentResizeHandler) contentResizeHandler()
+
+    if (getEl('#root-catalogue')[0]) window.addEventListener('click', expandCatalogue)
+  }
 })

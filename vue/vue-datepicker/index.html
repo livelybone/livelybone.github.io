@@ -44,28 +44,28 @@
 <h1 class="root-h1">vue-datepicker
 </h1>
 <div class="app">
-  <h2 class="root-h">Repository</h2>
+  <h2 id="Repository" class="root-h">Repository</h2>
   <div class="root-content-wrap">
     <a href="https://github.com/livelybone/vue-datepicker" target="_blank">
       https://github.com/livelybone/vue-datepicker
     </a>
   </div>
 
-  <h2 class="root-h">Datepicker</h2>
+  <h2 id="Datepicker" class="root-h">Datepicker</h2>
   <div class="example-wrap first">
     <div class="root-module-title">Example</div>
-    <div id="datepicker"></div>
+    <div id="date-picker"></div>
     <div id="datepicker-code"></div>
   </div>
 
-  <h2 class="root-h">Timepicker</h2>
+  <h2 id="Timepicker" class="root-h">Timepicker</h2>
   <div class="example-wrap">
     <div class="root-module-title">Example</div>
-    <div id="timepicker"></div>
+    <div id="time-picker"></div>
     <div id="timepicker-code"></div>
   </div>
 
-  <h2 class="root-h">DatetimePicker</h2>
+  <h2 id="DatetimePicker" class="root-h">DatetimePicker</h2>
   <div class="example-wrap">
     <div class="root-module-title">Example</div>
     <div id="datetime-picker"></div>
@@ -80,8 +80,10 @@
 <script src="https://unpkg.com/@livelybone/vue-datepicker"></script>
 <script type="text/javascript" id="code">
 var isM = isMobile()
+/*CATALOGUE: Repository, Datepicker, Timepicker, DatetimePicker, PopperProps*/
+
 /*START*/
-/*DESC:popperConfig, see in <a href="https://github.com/livelybone/vue-popper" target="_blank">@livelybone/vue-popper</a>*/
+/*DESC:popperConfig, see in <a id="PopperProps" href="https://github.com/livelybone/vue-popper" target="_blank">@livelybone/vue-popper</a>*/
 var popperProps = {
   popperOptions: {
     modifiers: {
@@ -100,7 +102,7 @@ var popperProps = {
 /*RENDER_ID:datepicker-code*/
 /*NAME:Code*/
 new Vue({
-  el: '#datepicker',
+  el: '#date-picker',
   template: '<datepicker :value="date"' +
   '                      @input="log"' +
   '                      min="2018-6-1"' +
@@ -128,7 +130,7 @@ new Vue({
 /*RENDER_ID:timepicker-code*/
 /*NAME:Code*/
 new Vue({
-  el: '#timepicker',
+  el: '#time-picker',
   template: '<timepicker type="second"' +
   '                      :value="time"' +
   '                      @input="log"' +

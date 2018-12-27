@@ -22,32 +22,32 @@
 <body>
 <h1 class="root-h1">vue-select</h1>
 <section class="app">
-  <h2 class="root-h">Repository</h2>
+  <h2 id="Repository" class="root-h">Repository</h2>
   <div class="root-content-wrap">
     <a href="https://github.com/livelybone/vue-select" target="_blank">
       https://github.com/livelybone/vue-select
     </a>
   </div>
 
-  <h2 class="root-h">SelectBase</h2>
+  <h2 id="SelectBase" class="root-h">SelectBase</h2>
   <div class="example-wrap">
     <div id="normal"></div>
     <div id="normal-code"></div>
   </div>
 
-  <h2 class="root-h">SelectMulti</h2>
+  <h2 id="SelectMulti" class="root-h">SelectMulti</h2>
   <div class="example-wrap">
     <div id="multi"></div>
     <div id="multi-code"></div>
   </div>
 
-  <h2 class="root-h">Cascader</h2>
+  <h2 id="Cascader" class="root-h">Cascader</h2>
   <div class="example-wrap">
-    <div id="cascader"></div>
+    <div id="cascader1"></div>
     <div id="cascader-code"></div>
   </div>
 
-  <h2 class="root-h">CascaderMulti</h2>
+  <h2 id="CascaderMulti" class="root-h">CascaderMulti</h2>
   <div class="example-wrap">
     <div id="cascader-multi"></div>
     <div id="cascader-multi-code"></div>
@@ -114,8 +114,10 @@ var options1 = [
   { name: 'place 17', value: 17 }
 ]
 
+/*CATALOGUE: Repository, SelectBase, SelectMulti, Cascader, CascaderMulti, PopperProps*/
+
 /*START*/
-/*DESC:popperConfig, see in <a href="https://github.com/livelybone/vue-popper" target="_blank">@livelybone/vue-popper</a>*/
+/*DESC:popperConfig, see in <a id="PopperProps" href="https://github.com/livelybone/vue-popper" target="_blank">@livelybone/vue-popper</a>*/
 var popperProps = {
   popperOptions: {
     modifiers: {
@@ -209,7 +211,7 @@ new Vue({
 /*RENDER_ID: cascader-code*/
 /*NAME: Code*/
 new Vue({
-  el: '#cascader',
+  el: '#cascader1',
   template: '<cascader class="select"' +
   '                    changeOnSelect' +
   '                    v-model="value"' +
