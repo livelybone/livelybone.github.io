@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>date-generator -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <script src="../../common/js/common.js"></script>
+  <style type="text/css">
+  .root-module-title {
+    margin: 0;
+  }
+
+  .root-desc {
+    margin: .1rem 0 0;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">Copy</h1>
+<section class="app">
+  <h2 id="Repository" class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/date-generator" target="_blank">
+      https://github.com/livelybone/date-generator
+    </a>
+    This module is now applied to a vue module
+    <a href="https://github.com/livelybone/vue-datepicker" target="_blank">
+      @livelybone/vue-datepicker
+    </a>
+  </div>
+
+  <h2 id="gntYear" class="root-h">gntYear</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(start: Integer, len: Interger, options: {min: Interger, max: Interger})
+      => Array<{year: Integer, canBeChose: Boolean}>`
+    </h3>
+    <p class="root-desc">
+      the properties of options is need to format like:
+      `2018[-02][-01]`(RegExp: `/^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/`),
+      such as: `2018-02-01` | `2018-02` | `2018`
+    </p>
+  </div>
+
+  <h2 id="gntMonth" class="root-h">gntMonth</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(year: Integer, options: {min: String, max: String})
+      => Array&lt;Array&lt;{year: Integer, month: Integer, canBeChose: Boolean}>>`
+    </h3>
+    <p class="root-desc">
+      the properties of options is need to format like:
+      `2018[-02][-01]`(RegExp: `/^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/`),
+      such as: `2018-02-01` | `2018-02` | `2018`
+    </p>
+  </div>
+
+  <h2 id="gntDate" class="root-h">gntDate</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(year: Integer, month: Interger, options: {min: String, max: String})<br>
+      => Array&lt;Array&lt;{year: Integer, month: Integer, date: Integer, isInThisMonth: Boolean,
+      canBeChose: Boolean}>>`
+    </h3>
+    <p class="root-desc">
+      the properties of options is need to format like:
+      `2018[-02][-01]`(RegExp: `/^(\d{4})-?(\d{1,2})?-?(\d{1,2})?$/`),
+      such as: `2018-02-01` | `2018-02` | `2018`
+    </p>
+  </div>
+
+  <h2 id="getDay" class="root-h">getDay</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">`(year: Integer, month: Interger, date: Integer) => Integer`</h3>
+  </div>
+
+  <h2 id="getHour" class="root-h">getHour</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(options: {interval: Integer, min: Integer, max: Integer})
+      => Array<{value: Integer, max: Integer, canBeChose: Boolean}>`
+    </h3>
+  </div>
+
+  <h2 id="getMinute" class="root-h">getMinute</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(options: {interval: Integer, min: Integer, max: Integer})
+      => Array<{value: Integer, max: Integer, canBeChose: Boolean}>`
+    </h3>
+  </div>
+
+  <h2 id="getSecond" class="root-h">getSecond</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(options: {interval: Integer, min: Integer, max: Integer})
+      => Array<{value: Integer, max: Integer, canBeChose: Boolean}>`
+    </h3>
+  </div>
+
+  <h2 id="isNonNegInt" class="root-h">isNonNegInt</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(options: {interval: Integer, min: Integer, max: Integer})
+      => Array<{value: Integer, max: Integer, canBeChose: Boolean}>`
+    </h3>
+  </div>
+
+  <h2 id="mod" class="root-h">mod</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">`(val: Number, div: Number) => Number`</h3>
+  </div>
+
+  <h2 id="isLeapYear" class="root-h">isLeapYear</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">`(year: Integer) => Boolean`</h3>
+  </div>
+
+  <h2 id="getMonthLen" class="root-h">getMonthLen</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">`(year: Integer, month: Integer) => Integer`</h3>
+  </div>
+
+  <h2 id="getIntervalVal" class="root-h">getIntervalVal</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(defaultMax: Integer)
+      => Function<(options: {interval: Integer, min: Integer, max: Integer})
+      => Array<{value: Integer, max: defaultMax, canBeChose: Boolean}>>`
+    </h3>
+  </div>
+
+  <h2 id="parseDate" class="root-h">parseDate</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(date: String)
+      => Object<{year: Integer, month: Integer, date: Integer}>`
+    </h3>
+  </div>
+
+  <h2 id="parseTime" class="root-h">parseTime</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">
+      `(time: String)
+      => Object<{hour: Integer, minute: Integer, second: Integer}>`
+    </h3>
+  </div>
+
+  <h2 id="fillTo" class="root-h">fillTo</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">`(width: Integer, number: Number, pad: String) => String`</h3>
+  </div>
+
+  <h2 id="objAssign" class="root-h">objAssign</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">`(o1: Object, o2: Object) => Object`</h3>
+  </div>
+
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script type="text/javascript" id="code">
+/*CATALOGUE: Repository, gntYear, gntMonth, gntDate, getDay, getHour, getMinute, getSecond, isNonNegInt, mod, isLeapYear, getMonthLen, getIntervalVal, parseDate, parseTime, fillTo, objAssign*/
+</script>
+</body>
+</html>

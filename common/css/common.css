@@ -119,6 +119,10 @@ a:hover, button:hover {
   transition: all .5s cubic-bezier(.4, 0, .2, 1);
 }
 
+.root-content-wrap {
+  line-height: .22rem;
+}
+
 .root-h {
   display: inline-block;
   margin: .4rem 0 .2rem;
@@ -323,5 +327,6 @@ a:hover, button:hover {
   .root-catalogue-items {
     opacity: 1;
     pointer-events: initial;
+    max-height: calc(100vh - .3rem) !important;
   }
 }
