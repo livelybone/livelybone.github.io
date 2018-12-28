@@ -64,6 +64,10 @@ input, select {
   height: .34rem;
 }
 
+img, input, select, button {
+  vertical-align: middle;
+}
+
 a {
   color: #42b983;
 }
@@ -101,6 +105,7 @@ a:hover, button:hover {
   color: #262f3a;
   text-indent: .4rem;
   cursor: pointer;
+  transition: all .5s cubic-bezier(.4, 0, .2, 1);
 }
 
 .root-h1:before {
@@ -111,6 +116,7 @@ a:hover, button:hover {
   bottom: 0;
   width: .5rem;
   background: url('../../logo.png') no-repeat left .05rem center/.32rem auto;
+  transition: all .5s cubic-bezier(.4, 0, .2, 1);
 }
 
 .root-h {
@@ -131,6 +137,7 @@ a:hover, button:hover {
 .other-code-wrap, .app {
   width: calc(100% - .3rem);
   margin: 0 auto;
+  transition: all .5s cubic-bezier(.4, 0, .2, 1);
 }
 
 .example-wrap {
@@ -142,6 +149,10 @@ a:hover, button:hover {
 
 .code-wrap {
   margin-top: .2rem;
+}
+
+.code-wrap:first-child {
+  margin-top: 0;
 }
 
 .root-module-title, .code-title {
