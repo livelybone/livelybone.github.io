@@ -177,6 +177,15 @@ a:hover, button:hover {
 
 }
 
+.root-qrcode {
+  display: block;
+  line-height: .5rem;
+}
+
+.root-qrcode-img {
+  width: 2rem;
+}
+
 /*================
  Catalogue
  ================*/
@@ -301,7 +310,7 @@ a:hover, button:hover {
     border: 1px solid #eaefef;
     border-radius: .03rem;
     transform: translate(600px, 0);
-    background: #fff url('../images/avatar.jpg') no-repeat top center / 100% auto;
+    background: #fff url('../images/qrcode.jpg') no-repeat top center / 100% auto;
     box-shadow: none;
   }
 
@@ -325,5 +334,9 @@ a:hover, button:hover {
     opacity: 1;
     pointer-events: initial;
     max-height: calc(100vh - .3rem) !important;
+  }
+
+  .root-qrcode {
+    display: none;
   }
 }

@@ -33,6 +33,16 @@
     color: #fff;
     background: #6d8a8a;
   }
+
+  .code-title {
+    margin-bottom: 0;
+    padding: 0 .1rem;
+    font-size: .12rem;
+  }
+
+  .root-qrcode-img {
+    vertical-align: top;
+  }
   </style>
 </head>
 <body>
@@ -40,9 +50,31 @@
   <img class="logo" src="./logo.svg" alt="">
   Welcome to livelybone.github.io
 </h1>
-<section class="app"></section>
+<section class="app">
+  <h2 id="Intro" class="root-h">Intro</h2>
+  <div class="example-wrap">
+    <p class="root-desc">Name: <span class="font-error">刘志平</span></p>
+    <p class="root-desc">Net Name: <span class="font-error">livelybone</span></p>
+    <p class="root-desc">Birthday: <span class="font-error">1993-02</span></p>
+    <p class="root-desc">Self Assessment:
+      <span class="font-error">Strong learning ability; Responsible; Positive attitude; Good at dealing with colleagues, strong team work ability; </span>
+    </p>
+    <p class="root-desc">Skills:
+      <span class="code-title font-main">JS</span>
+      <span class="code-title font-main">Vue</span>
+      <span class="code-title font-main">React</span>
+      <span class="code-title font-main">CSS</span>
+      <span class="code-title font-main">HTML</span>
+      <span class="code-title font-main">UI</span>
+      <span class="code-title font-main">UE</span>
+    </p>
+    <p class="root-qrcode">WeChat:
+      <img class="root-qrcode-img" src="common/images/qrcode.jpg" alt="">
+    </p>
+  </div>
+</section>
 <script type="text/javascript" id="code">
-/*CATALOGUE: vue, js-tool*/
+/*CATALOGUE: Intro, vue, js-tool*/
 
 var modules = {
   vue: [
