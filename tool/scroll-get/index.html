@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>scroll-get -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <script src="../../common/js/common.js"></script>
+  <script src="https://unpkg.com/@livelybone/scroll-get"></script>
+  <style type="text/css">
+  .btn-groups {
+    margin: 0 0 -.15rem;
+  }
+
+  button {
+    /*margin: 0 .15rem .15rem 0;*/
+  }
+
+  @media (orientation: portrait) {
+    button {
+      width: 100%;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  textarea {
+    width: 2rem;
+    height: 1rem;
+    padding: .1rem;
+  }
+
+  #page, #client, #rect {
+    width: 2rem;
+    max-width: 100%;
+    height: 1rem;
+    line-height: calc(1rem - 2px);
+    text-align: center;
+    border: 1px dashed #eaefef;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">ScrollGet</h1>
+<section class="app">
+  <h2 id="Repository" class="root-h">Repository</h2>
+  <div class="root-content-wrap">
+    <a href="https://github.com/livelybone/scroll-get" target="_blank">
+      https://github.com/livelybone/scroll-get
+    </a>
+  </div>
+
+  <h2 id="posRelativeToPage" class="root-h">posRelativeToPage</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3><br>
+    <div id="page">page</div>
+    <button style="display: block; margin-top: .1rem" onclick="getPagePos()">Get pos to page
+    </button>
+    <span id="page-text" class="font-warn" style="display: block; margin-top: .1rem"></span>
+    <div id="page-code"></div>
+  </div>
+
+  <h2 id="posRelativeToClient" class="root-h">posRelativeToClient</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3><br>
+    <div id="client">client</div>
+    <button style="display: block; margin-top: .1rem" onclick="getClientPos()">Get pos to client
+    </button>
+    <span id="client-text" class="font-warn" style="display: block; margin-top: .1rem"></span>
+    <div id="client-code"></div>
+  </div>
+
+  <h2 id="getRect" class="root-h">getRect</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3><br>
+    <div id="rect">rect</div>
+    <button style="display: block; margin-top: .1rem" onclick="getRect()">Get rect info</button>
+    <span id="rect-text" class="font-warn" style="display: block; margin-top: .1rem"></span>
+    <div id="rect-code"></div>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script type="text/javascript" id="code">
+/*CATALOGUE: Repository, posRelativeToPage, posRelativeToClient, getRect*/
+
+/*START*/
+/*RENDER_ID: page-code*/
+/*NAME: Code*/
+function getPagePos() {
+  var pos = ScrollGet.posRelativeToPage(getEl('#page')[0])
+  getEl('#page-text')[0].innerText = 'PageLeft: ' + pos.pageLeft + ', PageTop: ' + pos.pageTop
+}
+
+/*END*/
+
+/*START*/
+/*RENDER_ID: client-code*/
+/*NAME: Code*/
+function getClientPos() {
+  var pos = ScrollGet.posRelativeToClient(getEl('#client')[0])
+  getEl('#client-text')[0].innerText = 'ClientLeft: ' + pos.clientLeft + ', ClientTop: ' + pos.clientTop
+}
+
+/*END*/
+
+/*START*/
+/*RENDER_ID: rect-code*/
+/*NAME: Code*/
+function getRect() {
+  var pos = ScrollGet.getRect(getEl('#rect')[0])
+  getEl('#rect-text')[0].innerText = JSON.stringify(pos)
+}
+
+/*END*/
+</script>
+</body>
+</html>
