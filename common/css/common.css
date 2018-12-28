@@ -178,7 +178,7 @@ a:hover, button:hover {
 }
 
 .root-catalogue-items {
-  max-height: calc(40vh - .3rem - .3rem);
+  max-height: calc(60vh - .3rem - .3rem);
   opacity: 0;
   pointer-events: none;
   overflow: auto;
