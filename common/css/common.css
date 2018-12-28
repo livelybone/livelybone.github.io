@@ -95,7 +95,7 @@ a:hover, button:hover {
 /*================
  Layout
  ================*/
-.root-h1 {
+.root-h1, .root-header {
   position: relative;
   width: calc(100% - .3rem);
   margin: .2rem auto 0;
@@ -184,6 +184,7 @@ a:hover, button:hover {
   position: fixed;
   bottom: .2rem;
   right: .2rem;
+  z-index: 999;
   width: .5rem;
   height: .5rem;
   border-radius: 50%;
@@ -282,29 +283,25 @@ a:hover, button:hover {
 }
 
 @media screen and (min-width: 1220px) and (orientation: landscape) {
-  .root-h1, .other-code-wrap, .app {
+  .root-h1, .root-header, .other-code-wrap, .app {
     width: 1200px;
   }
 
   .root-h1.padding, .other-code-wrap.padding, .app.padding {
-    padding-left: 2.15rem;
-  }
-
-  .root-h1.padding:before {
-    left: 2.15rem;
+    padding-right: 2.15rem;
   }
 
   .root-catalogue {
-    right: auto;
     bottom: auto;
-    left: 50%;
+    right: 50%;
     top: .15rem;
     width: 2rem !important;
     height: auto !important;
-    padding: .15rem;
+    padding: 2.1rem .15rem .15rem;
     border: 1px solid #eaefef;
     border-radius: .03rem;
-    transform: translate(-600px, 0);
+    transform: translate(600px, 0);
+    background: #fff url('../images/avatar.jpg') no-repeat top center / 100% auto;
     box-shadow: none;
   }
 

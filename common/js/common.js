@@ -31,12 +31,14 @@ function getEl(selector) {
 function createEl(tag, attrs) {
   if (!tag) return document.createDocumentFragment()
   var el = document.createElement(tag)
-  Object.keys(attrs).forEach(function (attr) {
-    if (attr === 'class' || attr === 'className') el.className = attrs[attr]
-    else if (attr === 'innerText' || attr === 'text') el.innerText = attrs[attr]
-    else if (attr === 'innerHTML' || attr.toLowerCase() === 'html') el.innerHTML = attrs[attr]
-    else el.setAttribute(attr, attrs[attr])
-  })
+  if (attrs instanceof Object) {
+    Object.keys(attrs).forEach(function (attr) {
+      if (attr === 'class' || attr === 'className') el.className = attrs[attr]
+      else if (attr === 'innerText' || attr === 'text') el.innerText = attrs[attr]
+      else if (attr === 'innerHTML' || attr.toLowerCase() === 'html') el.innerHTML = attrs[attr]
+      else el.setAttribute(attr, attrs[attr])
+    })
+  }
   return el
 }
 

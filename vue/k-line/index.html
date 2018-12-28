@@ -23,7 +23,7 @@
 <h1 class="root-h1">Kline</h1>
 <div class="app">
   <h2 class="root-h">Example</h2>
-  <p class="root-desc">目前只有 1min 的模拟数据, 分时线与非 1min 的线之间切换没有效果</p>
+  <p class="root-desc">At present, there is only `1min` of simulation data, and there is no effect of switching between `time` line and `non-1min` line</p>
   <div class="example-wrap">
     <div id="module"></div>
   </div>
@@ -8041,7 +8041,8 @@ function render() {
   /*START*/
   new Vue({
     el: '#module',
-    template: '<kline :isMobile="isMobile"' +
+    template: '<kline ref="kline"' +
+    '                 :isMobile="isMobile"' +
     '                 :data="data"' +
     '                 :loading="loading"' +
     '                 :period.sync="period"' +
@@ -8092,6 +8093,9 @@ function render() {
           that.data = that.data.slice(0, index).concat([prices])
         }, 3000)
       }, 1500)
+      this.$nextTick(function () {
+        this.$refs.kline.setLang('en')
+      })
     }
   })
   /*END*/
