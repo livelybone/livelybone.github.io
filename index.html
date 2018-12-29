@@ -211,13 +211,15 @@ window.addEventListener('DOMContentLoaded', function () {
         wrap.appendChild(createEl('a', {
           className: 'root-desc',
           text: 'Repository',
-          href: item.repository
+          href: item.repository,
+          target: '_blank'
         }))
       }
       wrap.appendChild(createEl('a', {
         className: 'root-desc',
         text: 'Example',
-        href: item.exampleLink
+        href: item.exampleLink,
+        target: '_blank'
       }))
       wrap.appendChild(createEl('br'))
     })
