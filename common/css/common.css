@@ -138,6 +138,10 @@ a:hover, button:hover {
   line-height: .22rem;
 }
 
+.root-desc:last-child {
+  margin: 0;
+}
+
 .other-code-wrap, .app {
   width: calc(100% - .3rem);
   margin: 0 auto;

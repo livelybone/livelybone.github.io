@@ -42,6 +42,14 @@
   .root-qrcode-img {
     vertical-align: top;
   }
+
+  a.root-content-wrap {
+    margin: .3rem 0 0;
+  }
+
+  a.root-content-wrap:first-child {
+    margin: 0;
+  }
   </style>
 </head>
 <body>
@@ -73,10 +81,10 @@
   </div>
 </section>
 <script type="text/javascript" id="code">
-/*CATALOGUE: Intro, vue, js-tool*/
+/*CATALOGUE: Intro, vue, js-tool, blogs*/
 
 var modules = {
-  vue: [
+  'vue': [
     {
       name: 'vue-kline',
       repository: '',
@@ -187,6 +195,13 @@ var modules = {
       exampleLink: 'tool/storage',
       brief: 'A module for localStorage, when it is not supported by browser, it will be degrading to use Cookie or Map'
     }
+  ],
+  'blogs': [
+    {
+      name: '进程与线程',
+      link: 'blog/threads&processes',
+      brief: '进程与线程的关系'
+    }
   ]
 }
 
@@ -195,11 +210,20 @@ window.addEventListener('DOMContentLoaded', function () {
   var fragment = createEl()
   Object.keys(modules).forEach(function (k) {
     var wrap = createEl('div', { className: 'example-wrap' })
-    modules[k].forEach(function (item) {
-      wrap.appendChild(createEl('h2', {
-        className: 'root-module-title',
-        text: item.name
-      }))
+    modules[k].forEach(function (item, i) {
+      if (item.link) {
+        wrap.appendChild(createEl('a', {
+          className: 'root-content-wrap',
+          href: item.link,
+          text: item.name,
+          target: '_blank'
+        }))
+      } else {
+        wrap.appendChild(createEl('h2', {
+          className: 'root-module-title',
+          text: item.name
+        }))
+      }
       wrap.appendChild(createEl('br'))
       if (item.brief) {
         wrap.appendChild(createEl('p', {
@@ -215,18 +239,20 @@ window.addEventListener('DOMContentLoaded', function () {
           target: '_blank'
         }))
       }
-      wrap.appendChild(createEl('a', {
-        className: 'root-desc',
-        text: 'Example',
-        href: item.exampleLink,
-        target: '_blank'
-      }))
-      wrap.appendChild(createEl('br'))
+      if (item.exampleLink) {
+        wrap.appendChild(createEl('a', {
+          className: 'root-desc',
+          text: 'Example',
+          href: item.exampleLink,
+          target: '_blank'
+        }))
+      }
+      if (i < modules[k].length - 1) wrap.appendChild(createEl('br'))
     })
     fragment.appendChild(createEl('h3', {
       className: 'root-h',
       id: k.replace(' ', '-'),
-      text: 'My plugins of ' + k
+      text: k === 'blogs' ? 'My ' + k : 'My plugins of ' + k
     }))
     fragment.appendChild(wrap)
   })

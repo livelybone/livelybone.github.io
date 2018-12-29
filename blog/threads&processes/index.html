@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>Threads and Processes -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <script src="../../common/js/common.js"></script>
+  <style type="text/css">
+  .btn-groups {
+    margin: 0 0 -.15rem;
+  }
+
+  button {
+    /*margin: 0 .15rem .15rem 0;*/
+  }
+
+  @media (orientation: portrait) {
+    button {
+      width: 100%;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  textarea {
+    width: 2rem;
+    height: 1rem;
+    padding: .1rem;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">线程与进程</h1>
+<section class="app">
+  <h2 id="总结" class="root-h">总结</h2>
+  <p class="root-content-wrap">
+    进程和线程都是对 CPU 的工作时间段的描述
+  </p>
+
+  <h2 id="进程" class="root-h">进程</h2>
+  <div class="example-wrap">
+    <p class="root-desc">
+      1. 是 CPU 包含上下文切换的程序执行时间总和
+    </p>
+    <p class="root-desc">
+      2. 是资源竞争的基本单位，比如竞争 CPU 的调度，以及申请内存（物理地址空间）
+    </p>
+    <h3 class="root-module-title">进程时间</h3>
+    <p class="root-desc font-warn">
+      = CPU 加载上下文 + CPU 执行 + CPU 保存上下文
+    </p>
+  </div>
+
+  <h2 id="线程" class="root-h">线程</h2>
+  <div class="example-wrap">
+    <p class="root-desc">
+      1. 是共享了<span class="font-warn">进程</span>的上下文环境的，更为细小的 CPU 时间段
+    </p>
+    <p class="root-desc">
+      2. 是程序运行的最小单位，是进程的分流（一个进程至少有一个线程）
+    </p>
+    <p class="root-desc">
+      3. 同一个进程的多个线程之间会共享进程的数据，如果多个线程同时访问进程的数据资源就可能会存在线程冲突（解决办法：互斥锁。这个有时候会出现`死锁``饥饿现象`），
+    </p>
+  </div>
+
+  <h2 id="互斥锁" class="root-h">互斥锁</h2>
+  <div class="example-wrap">
+    <p class="root-desc">
+      1. 定义：<span class="font-warn">对共享数据的对象添加的，用来保证任意时刻只能有一个线程访问该对象的标记</span>
+    </p>
+    <p class="root-desc">
+      2. 用于保证共享数据操作的完整性
+    </p>
+
+    <h3 class="root-module-title">锁操作</h3>
+    <p class="root-desc">
+      包括：
+      <span class="font-warn">加锁</span>、
+      <span class="font-warn">解锁</span>、
+      <span class="font-warn">测试加锁</span>
+    </p>
+    <p class="root-desc">
+      无论那种类型的锁，都无法同事让两个不同的线程访问得到被锁数据，都要等待解锁
+    </p>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script type="text/javascript" id="code">
+/*CATALOGUE: 总结, 进程, 互斥锁*/
+</script>
+</body>
+</html>
