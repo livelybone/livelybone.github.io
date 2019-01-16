@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>模仿 Vue 的 computed & watch -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <script src="../../common/js/common.js"></script>
+  <style type="text/css">
+  .btn-groups {
+    margin: 0 0 -.15rem;
+  }
+
+  button {
+    /*margin: 0 .15rem .15rem 0;*/
+  }
+
+  @media (orientation: portrait) {
+    button {
+      width: 100%;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  textarea {
+    width: 2rem;
+    height: 1rem;
+    padding: .1rem;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">模仿 Vue 的 computed & watch</h1>
+<section class="app">
+  <h2 id="简介" class="root-h">简介</h2>
+  <p class="root-content-wrap">
+    Vue 对数据之间的依赖的处理很方便：<br>
+    使用 computed 添加的属性，能自动根据依赖属性的变化更新属性值，并保留缓存；<br>
+    使用 watch，能监听属性值的变化。<br><br>
+    本文目的在于探讨 computed 和 watch 的内部实现逻辑，帮助我们更好的理解这种响应式数据的开发模式<br>
+    以下为我的简化版的实现(未借鉴 Vue 源码，因为我还没看(TOT))：
+  </p>
+
+  <h2 id="示例" class="root-h">示例</h2>
+  <div class="example-wrap">
+    <p class="root-module-title">{{ obj.a }} + {{ obj.b }} = {{ obj.c }}</p><br>
+    <p class="root-desc">
+      <input type="number" id="a"> +
+      <input type="number" id="b"> =
+      <span id="c"></span>
+    </p>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script type="text/javascript" id="code">
+/*CATALOGUE: 简介, 示例, Code*/
+
+var pre_key = '$_observer_secret_'
+var key_handler = '$_observer_handler_'
+
+/*START*/
+/*NAME:业务代码*/
+var obj = new Computed({
+  data: {
+    a: 1,
+    b: 2
+  },
+  computed: {
+    c: function () {
+      console.log('>> computed', this.a, this.b)
+      return this.a + this.b
+    }
+  },
+  watch: {
+    b: function (val) {
+      console.log('watch b', val)
+    },
+    c: function (val) {
+      console.log('watch c', val)
+      getEl('#c')[0].innerHTML = val
+    }
+  }
+})
+
+getEl('#a')[0].value = obj.a
+getEl('#b')[0].value = obj.b
+getEl('#c')[0].innerHTML = obj.c
+getEl('#a')[0].addEventListener('input', function (ev) {
+  obj.a = +ev.target.value
+})
+
+getEl('#b')[0].addEventListener('input', function (ev) {
+  obj.b = +ev.target.value
+})
+/*END*/
+
+/*START*/
+/*NAME:构造函数*/
+function Computed(options) {
+  var that = this
+  this.$options = options || {}
+  var data = that.$options.data || {}
+  var computed = that.$options.computed || {}
+  var watch = that.$options.watch || {}
+
+  var dataKeys = Object.keys(data)
+  dataKeys.forEach(function (k) {
+    /* 将属性添加到 this */
+    observer(that, k, data[k])
+  })
+
+  Object.keys(computed).forEach(function (k) {
+    var fn = computed[k]
+
+    /* 计算依赖项 */
+    var regStr = '[\\s,;.]('
+      + dataKeys
+        .slice(1)
+        .reduce(function (pre, k) {
+          return pre + '|' + k
+        }, dataKeys[0])
+      + ')([\\s,;.)]|$)'
+    var matched = fn.toString()
+      .match(new RegExp(regStr, 'g'))
+    var dependencies = matched
+      ? matched
+        .map(function (str) {
+          return str.match(regStr)[1]
+        })
+      : []
+    dependencies = dependencies.reduce(function (pre, k) {
+      if (pre.indexOf(k) > -1) return pre
+      return pre.concat(k)
+    }, [])
+
+    /* 将属性添加到 this */
+    observer(that, k, fn.call(that))
+
+    /* 为依赖项添加监听事件 */
+    addHandler(
+      function () {
+        that[k] = fn.call(that)
+      },
+      dependencies,
+      that
+    )
+  })
+
+  Object.keys(watch).forEach(function (k) {
+    addHandler(watch[k].bind(that), [k], that)
+  })
+}
+
+/*END*/
+
+/*START*/
+/*NAME:用 setter 和 getter 改造属性*/
+function observer(target, key, initValue, canSet) {
+  var k = pre_key + key
+  var hk = key_handler + key
+
+  /* 添加属性对应的监听函数数组 */
+  if (typeof target[hk] !== 'object') {
+    Object.defineProperty(target, hk, { value: [], enumerable: false })
+  } else {
+    target[hk] = []
+  }
+
+  /* 添加属性对应的缓存 */
+  Object.defineProperty(target, k, {
+    value: initValue || target[key],
+    writable: true,
+    enumerable: false
+  })
+
+  /* 用 setter 和 getter 改造属性 */
+  Object.defineProperty(target, key, {
+    get: function () {
+      return target[k]
+    },
+    set: function (val) {
+      if (canSet !== false) {
+        target[k] = val
+        if (target[hk]) {
+          target[hk].forEach(function (h) {
+            h(val)
+          })
+        }
+      }
+    }
+  })
+}
+
+/*END*/
+
+/*START*/
+/*NAME:添加监听函数*/
+function addHandler(fn, dependencies, target) {
+  dependencies.forEach(function (d) {
+      target[key_handler + d].push(fn)
+    }
+  )
+}
+
+/*END*/
+</script>
+</body>
+</html>
