@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html style="font-size:625%">
+<head>
+  <meta charset="utf-8">
+  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+  <meta name="author" content="livelybone(2631541504@qq.com)">
+  <title>动态规划 背包问题 -- livelybone</title>
+  <link rel="shortcut icon" href="../../logo.png">
+  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../common/css/common.css">
+  <link rel="stylesheet" href="../../common/css/highlight.min.css">
+  <script src="../../common/js/common.js"></script>
+  <style type="text/css">
+  .btn-groups {
+    margin: 0 0 -.15rem;
+  }
+
+  button {
+    /*margin: 0 .15rem .15rem 0;*/
+  }
+
+  @media (orientation: portrait) {
+    button {
+      width: 100%;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    vertical-align: middle;
+  }
+
+  textarea {
+    width: 2rem;
+    height: 1rem;
+    padding: .1rem;
+  }
+  </style>
+</head>
+<body>
+<h1 class="root-h1">动态规划 背包问题</h1>
+<section class="app">
+  <h2 id="简介" class="root-h">简介</h2>
+  <p class="root-content-wrap">
+    Vue 对数据之间的依赖的处理很方便：<br>
+    使用 computed 添加的属性，能自动根据依赖属性的变化更新属性值，并保留缓存；<br>
+    使用 watch，能监听属性值的变化。<br><br>
+    本文目的在于探讨 computed 和 watch 的内部实现逻辑，帮助我们更好的理解这种响应式数据的开发模式<br>
+    以下为我的简化版的实现(未借鉴 Vue 源码，因为我还没看(TOT))：
+  </p>
+
+  <h2 id="示例" class="root-h">示例</h2>
+  <div class="example-wrap">
+    <p class="root-module-title">{{ obj.a }} + {{ obj.b }} = {{ obj.c }}</p><br>
+    <p class="root-desc">
+      <input type="number" id="a"> +
+      <input type="number" id="b"> =
+      <span id="c"></span>
+    </p>
+  </div>
+</section>
+
+<script src="../../common/js/highlight.min.js"></script>
+<script type="text/javascript" id="code">
+/*CATALOGUE: 简介, 示例, Code*/
+
+/*START*/
+var stones = [
+  { weight: 2, value: 6 },
+  { weight: 2, value: 3 },
+  { weight: 6, value: 5 },
+  { weight: 5, value: 4 },
+  { weight: 4, value: 6 }
+]
+
+var packBearing = 10
+/*END*/
+
+/*START*/
+/*DESC: 复杂度为 O(n)*/
+console.log(calcMaxValueForPack(stones, packBearing))
+
+function calcPerValue(stone) {
+  return stone.value / stone.weight
+}
+
+function calcMaxValueForPack(stones, packBearing) {
+  var cStones = stones
+    .slice()
+    .sort(function (a, b) {
+      return calcPerValue(b) - calcPerValue(a)
+    })
+  var pack = {
+    stones: [],
+    weight: 0,
+    value: 0
+  }
+  for (var i = 0; i < cStones.length; i++) {
+    var stone = cStones[i]
+    var leftBearing = packBearing - pack.weight - stone.weight
+    if (leftBearing >= 0) {
+      pack.stones.push(stone)
+      pack.weight += stone.weight
+      pack.value += stone.value
+      if (leftBearing === 0) break
+    }
+  }
+  return pack
+}
+
+/*END*/
+
+/*START*/
+/*DESC: 复杂度为 O(n)*/
+
+/*END*/
+</script>
+</body>
+</html>
