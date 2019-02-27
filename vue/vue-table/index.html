@@ -199,7 +199,13 @@ var tableExtend = new Vue({
       console.log(val)
     }
   },
-  components: { 'vue-table': VueTable.TableExtend }
+  components: { 'vue-table': VueTable.TableExtend },
+  mounted: function () {
+    var that = this
+    setTimeout(function () {
+      that.$refs.table.sizeChange()
+    }, 500)
+  }
 })
 /*END*/
 
