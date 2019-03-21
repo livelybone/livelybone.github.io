@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="../../common/css/highlight.min.css">
   <script src="../../common/js/common.js"></script>
   <style type="text/css">
-  .btn-groups {
+  .btn-group {
     margin: 0 0 -.15rem;
   }
 
@@ -58,11 +58,25 @@
   <h2 class="root-h">Example</h2>
   <div class="example-wrap">
     <div id="app"></div>
-    <div class="btn-groups">
-      <button class="gray">Trigger open function</button>
-      <button class="green">Trigger info function</button>
-      <button class="yellow">Trigger warn function</button>
-      <button class="red">Trigger error function</button>
+    <div class="root-content-wrap">
+      <div class="root-module-title">Set position</div>
+      <div class="btn-group" id="position" style="margin: 0">
+        <button class="top-left">top-left</button>
+        <button class="top-center">top-center</button>
+        <button class="top-right">top-right</button>
+        <button class="bottom-left">bottom-left</button>
+        <button class="bottom-center">bottom-center</button>
+        <button class="bottom-right">bottom-right</button>
+      </div>
+    </div>
+    <div class="root-content-wrap">
+      <div class="root-module-title">Trigger</div>
+      <div class="btn-group">
+        <button class="gray">Trigger open function</button>
+        <button class="green">Trigger info function</button>
+        <button class="yellow">Trigger warn function</button>
+        <button class="red">Trigger error function</button>
+      </div>
     </div>
   </div>
 </section>
@@ -74,9 +88,11 @@
 /*START*/
 var vue = new Vue({
   el: '#app',
-  template: '<snackbar baseSize="1rem" ref="snackbar" :holdTime="5000"/>',
+  template: '<snackbar baseSize="1rem" ref="snackbar" :holdTime="5000" :position="position"/>',
   data: function () {
-    return {}
+    return {
+      position: 'top-center'
+    }
   },
   components: { 'snackbar': VueSnackbar }
 })
@@ -93,6 +109,9 @@ window.addEventListener('DOMContentLoaded', function () {
   })
   getEl('.red')[0].addEventListener('click', function () {
     vue.$refs.snackbar.error('Error function triggered')
+  })
+  getEl('#position')[0].addEventListener('click', function (ev) {
+    if (ev.target.className !== 'btn-group') vue.position = ev.target.innerText
   })
 })
 /*END*/
