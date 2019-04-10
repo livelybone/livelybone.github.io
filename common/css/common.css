@@ -310,7 +310,7 @@ a:hover, button:hover {
     top: .15rem;
     width: 2rem !important;
     height: auto !important;
-    padding: 2.1rem .15rem .15rem;
+    padding: 2.1rem .15rem .15rem !important;
     border: 1px solid #eaefef;
     border-radius: .03rem;
     transform: translate(600px, 0);

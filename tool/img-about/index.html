@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="../../common/css/common.css">
   <link rel="stylesheet" href="../../common/css/highlight.min.css">
   <script src="../../common/js/common.js"></script>
-  <script src="https://unpkg.com/img-about"></script>
+  <script src="https://unpkg.com/img-about@2.0.1/lib/umd/index.js"></script>
   <style type="text/css">
   button {
     /*margin: 0 .15rem .15rem 0;*/
@@ -35,7 +35,7 @@
 
   label {
     display: inline-block;
-    min-width: .8rem;
+    min-width: 1rem;
     padding-right: .1rem;
     vertical-align: middle;
   }
@@ -60,7 +60,8 @@
     border: 1px solid #eaefef;
   }
 
-  .config input[type=number] {
+  .config input[type=number],
+  .config input[type=text] {
     margin-top: .1rem;
   }
   </style>
@@ -84,7 +85,7 @@
     <div id="natural-code"></div>
   </div>
 
-  <h2 id="GetNaturalSize-Url" class="root-h">GetNaturalSizeUrl</h2>
+  <h2 id="GetNaturalSize-Url" class="root-h">GetNaturalSize by url</h2>
   <div class="example-wrap">
     <h3 class="root-module-title">Example</h3><br>
     <label for="input">Image url: </label><input id="input" style="width: 3rem; max-width: 100%"/>
@@ -93,12 +94,12 @@
     <div id="natural-1-code"></div>
   </div>
 
-  <h2 id="ImageMinify" class="root-h">ImageMinify</h2>
+  <h2 id="ImageCompress" class="root-h">ImageCompress</h2>
   <div class="example-wrap">
     <h3 class="root-module-title">Example</h3><br>
     <label for="input">Image Input: </label>
     <input id="file" type="file" accept="image/*" style="width: 3rem; max-width: 100%"/>
-    <button style="display: block; margin-top: .1rem" onclick="minify()">Minify</button>
+    <button style="display: block; margin-top: .1rem" onclick="minify()">Compress</button>
     <div class="img-wrap">
       <img alt="Minified image" id="show-img"/>
     </div>
@@ -115,14 +116,11 @@
       <label for="scale">scale: </label>
       <input id="scale" type="number"/><br>
 
-      <label for="width">width: </label>
-      <input id="width" type="number"/><br>
+      <label for="imageSize">imageSize: </label>
+      <input id="imageSize" type="number"/><br>
 
-      <label for="height">height: </label>
-      <input id="height" type="number"/><br>
-
-      <label for="size">size: </label>
-      <input id="size" type="number"/><br>
+      <label for="imageType">imageType: </label>
+      <input id="imageType" type="text"/><br>
 
       <label for="quality">quality: </label>
       <input id="quality" type="number"/><br>
@@ -138,12 +136,13 @@
 
 <script src="../../common/js/highlight.min.js"></script>
 <script type="text/javascript" id="code">
-/*CATALOGUE: Repository, GetNaturalSize, GetNaturalSize-Url, ImageMinify*/
+/*CATALOGUE: Repository, GetNaturalSize, GetNaturalSize-Url, ImageCompress*/
 
 /*START*/
 /*RENDER_ID: natural-code*/
 /*NAME: Code*/
 function getSize() {
+  /* ImgAbout.getNaturalSize: (url: String|Image|File|FileList|Blob) => Promise<Object: {width, height}> */
   ImgAbout.getNaturalSize(getEl('#img')[0]).then(function (size) {
     getEl('#size-1')[0].innerText = 'naturalWidth: ' + size.width + ', naturalHeight: ' + size.height
   })
@@ -157,6 +156,7 @@ function getSize() {
 function getSizeUrl() {
   var val = getEl('#input')[0].value
   if (val) {
+    /* ImgAbout.getNaturalSize: (url: String|Image|File|FileList|Blob) => Promise<Object: {width, height}> */
     ImgAbout.getNaturalSize(val).then(function (size) {
       getEl('#size-2')[0].innerText = 'naturalWidth: ' + size.width + ', naturalHeight: ' + size.height
     }).catch(function (e) {
@@ -173,13 +173,12 @@ function getSizeUrl() {
 /*RENDER_ID: img-code*/
 /*NAME: Code*/
 var defaultOptions = {
-  compressType: 'scale', /* compress type, options: `['scale', 'fixedWidth', 'fixedHeight', 'fixedSize']` */
-  scale: 1, /* scale factor, usable when compressType is `scale` */
-  width: 0, /* if it is `0`, it means auto-computed, usable when compressType is `fixedWidth` */
-  height: 0, /* if it is `0`, it means auto-computed, usable when compressType is `fixedHeight` */
-  size: 0, /* min size value, usable when compressType is `fixedSize` */
-  quality: .8, /* compress quality */
-  toBlob: false /* if it is false, the function will resolve to base64 string */
+  compressType: 'scale',    /* Compress type, options: `compressTypes` */
+  scale: 1,                 /* Scale factor, works when compressType is `scale` */
+  imageSize: 0,             /* The fixed value of size, works when compressType is `fixedWidth`, `fixedHeight` or `fixedSize`. If imageSize is 0, it means convert to naturalSize */
+  imageType: '',            /* The mine type of image returned */
+  quality: .8,              /* Compress quality, works when imageType is `image/jpeg` or `image/webp` */
+  toBlob: true              /* If it is false, the promise returned will be resolved with a base64 string */
 }
 
 var options = JSON.parse(JSON.stringify(defaultOptions))
@@ -187,7 +186,8 @@ var options = JSON.parse(JSON.stringify(defaultOptions))
 function minify() {
   var val = getEl('#file')[0].files[0]
   if (val) {
-    ImgAbout.imgMinify(val, options).then(function (result) {
+    console.log(val)
+    ImgAbout.imgCompress(val, options).then(function (result) {
       if (typeof result === 'string') {
         getEl('#show-img')[0].src = result
       } else {
@@ -206,9 +206,8 @@ function bindOptions() {
   var idArr = [
     { id: 'compressType', type: 'select' },
     { id: 'scale', type: 'number' },
-    { id: 'width', type: 'number' },
-    { id: 'height', type: 'number' },
-    { id: 'size', type: 'number' },
+    { id: 'imageSize', type: 'number' },
+    { id: 'imageType', type: 'text' },
     { id: 'quality', type: 'number' },
     { id: 'toBlob', type: 'checkbox' }
   ]
@@ -218,14 +217,15 @@ function bindOptions() {
     var el = getEl('#' + id)[0]
     if (el) {
       el.value = options[id]
+      el.checked = options[id]
       var f = function (ev) {
         /*console.log(ev, el.value, el.checked)*/
         if (item.type === 'number') {
-          options[id] = +el.value
+          options[id] = +ev.target.value
         } else if (item.type === 'checkbox') {
-          options[id] = el.checked
+          options[id] = ev.target.checked
         } else {
-          options[id] = el.value
+          options[id] = ev.target.value
         }
       }
       el.addEventListener('change', f)
