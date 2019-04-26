@@ -108,7 +108,7 @@ var tableData = [
   { name: 'thy', age: '24', sex: 'female' },
   { name: 'thy', age: '24', sex: 'female' },
   { name: 'thy', age: '24', sex: 'female' },
-  { name: 'thy', age: '24', sex: 'female' }
+  { name: 'thy', age: '24', sex: 'female' },
 ]
 
 /*CATALOGUE: Repository, TableBase, TableExtend*/
@@ -126,34 +126,34 @@ new Vue({
   '                     @clickTr="log"' +
   '                     @clickTd="log"' +
   '                     @clickTh="log"></vue-table>',
-  data: function () {
+  data: function() {
     return {
       isMobile: isMobile,
       heads: [
         {
-          name: '姓名',
-          alias: 'name',
+          title: '姓名',
+          key: 'name',
           style: { textAlign: 'left' },
           tdStyle: { textAlign: 'right' },
-          formatter: function (item, alias) {
-            return item[alias] + ' - x'
-          }
+          formatter: function(item, key) {
+            return item[key] + ' - x'
+          },
         },
-        { name: '年龄', alias: 'age' },
-        { name: '性别', alias: 'sex' }
+        { title: '年龄', key: 'age' },
+        { title: '性别', key: 'sex' },
       ],
       data: tableData.slice(0, 5),
       headTrStyle: { background: '#f8f9fb' },
       trStyle: { background: '#fefefe' },
-      evenTrStyle: { background: '#fafafa' }
+      evenTrStyle: { background: '#fafafa' },
     }
   },
   methods: {
-    log: function (val) {
+    log: function(val) {
       console.log(val)
-    }
+    },
   },
-  components: { 'vue-table': VueTable.TableBase }
+  components: { 'vue-table': VueTable.TableBase },
 })
 /*END*/
 
@@ -172,44 +172,44 @@ var tableExtend = new Vue({
   '                     @clickTr="log"' +
   '                     @clickTd="log"' +
   '                     @clickTh="log"></vue-table>',
-  data: function () {
+  data: function() {
     return {
       isMobile: isMobile,
       heads: [
         {
-          name: '姓名',
-          alias: 'name',
+          title: '姓名',
+          key: 'name',
           style: { textAlign: 'left' },
           tdStyle: { textAlign: 'right' },
-          formatter: function (item, alias) {
-            return item[alias] + ' - x'
-          }
+          formatter: function(item, key) {
+            return item[key] + ' - x'
+          },
         },
-        { name: '年龄', alias: 'age', width: isMobile ? 400 : 800 },
-        { name: '性别', alias: 'sex' }
+        { title: '年龄', key: 'age', width: isMobile ? 400 : 800 },
+        { title: '性别', key: 'sex' },
       ],
       data: tableData,
       headTrStyle: { background: '#f8f9fb' },
       trStyle: { background: '#fefefe' },
-      evenTrStyle: { background: '#fafafa' }
+      evenTrStyle: { background: '#fafafa' },
     }
   },
   methods: {
-    log: function (val) {
+    log: function(val) {
       console.log(val)
-    }
+    },
   },
   components: { 'vue-table': VueTable.TableExtend },
-  mounted: function () {
+  mounted: function() {
     var that = this
-    setTimeout(function () {
+    setTimeout(function() {
       that.$refs.table.sizeChange()
     }, 500)
-  }
+  },
 })
 /*END*/
 
-window.contentResizeHandler = function () {
+window.contentResizeHandler = function() {
   tableExtend.$refs.table.sizeChange()
   console.log(tableExtend.$refs.table.$refs.table)
 }
