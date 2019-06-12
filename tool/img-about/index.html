@@ -186,7 +186,7 @@ var options = JSON.parse(JSON.stringify(defaultOptions))
 function minify() {
   var val = getEl('#file')[0].files[0]
   if (val) {
-    console.log(val)
+    console.log(val, options)
     ImgAbout.imgCompress(val, options).then(function (result) {
       if (typeof result === 'string') {
         getEl('#show-img')[0].src = result
@@ -219,7 +219,7 @@ function bindOptions() {
       el.value = options[id]
       el.checked = options[id]
       var f = function (ev) {
-        /*console.log(ev, el.value, el.checked)*/
+        /* console.log(ev, el.value, el.checked) */
         if (item.type === 'number') {
           options[id] = +ev.target.value
         } else if (item.type === 'checkbox') {
