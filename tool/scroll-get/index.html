@@ -12,39 +12,39 @@
   <script src="../../common/js/common.js"></script>
   <script src="https://unpkg.com/@livelybone/scroll-get"></script>
   <style type="text/css">
-  .btn-group {
-    margin: 0 0 -.15rem;
-  }
-
-  button {
-    /*margin: 0 .15rem .15rem 0;*/
-  }
-
-  @media (orientation: portrait) {
-    button {
-      width: 100%;
+    .btn-group {
+      margin: 0 0 -.15rem;
     }
-  }
 
-  img {
-    max-width: 100%;
-    vertical-align: middle;
-  }
+    button {
+      /*margin: 0 .15rem .15rem 0;*/
+    }
 
-  textarea {
-    width: 2rem;
-    height: 1rem;
-    padding: .1rem;
-  }
+    @media (orientation: portrait) {
+      button {
+        width: 100%;
+      }
+    }
 
-  #page, #client, #rect {
-    width: 2rem;
-    max-width: 100%;
-    height: 1rem;
-    line-height: calc(1rem - 2px);
-    text-align: center;
-    border: 1px dashed #eaefef;
-  }
+    img {
+      max-width: 100%;
+      vertical-align: middle;
+    }
+
+    textarea {
+      width: 2rem;
+      height: 1rem;
+      padding: .1rem;
+    }
+
+    #page, #client, #rect {
+      width: 2rem;
+      max-width: 100%;
+      height: 1rem;
+      line-height: calc(1rem - 2px);
+      text-align: center;
+      border: 1px dashed #eaefef;
+    }
   </style>
 </head>
 <body>
@@ -77,6 +77,15 @@
     <div id="client-code"></div>
   </div>
 
+  <h2 id="getNativeScrollbarWidth" class="root-h">getNativeScrollbarWidth</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3><br>
+    <div id="scrollbar">rect</div>
+    <button style="display: block; margin-top: .1rem" onclick="getNativeScrollbarWidth()">Get rect info</button>
+    <span id="scrollbar-text" class="font-warn" style="display: block; margin-top: .1rem"></span>
+    <div id="scrollbar-code"></div>
+  </div>
+
   <h2 id="getRect" class="root-h">getRect</h2>
   <div class="example-wrap">
     <h3 class="root-module-title">Example</h3><br>
@@ -107,6 +116,16 @@ function getPagePos() {
 function getClientPos() {
   var pos = ScrollGet.posRelativeToClient(getEl('#client')[0])
   getEl('#client-text')[0].innerText = 'ClientLeft: ' + pos.clientLeft + ', ClientTop: ' + pos.clientTop
+}
+
+/*END*/
+
+/*START*/
+/*RENDER_ID: scrollbar-code*/
+/*NAME: Code*/
+function getNativeScrollbarWidth() {
+  var info = ScrollGet.getNativeScrollbarWidth(getEl('#scrollbar')[0])
+  getEl('#scrollbar-text')[0].innerText = JSON.stringify(info)
 }
 
 /*END*/
