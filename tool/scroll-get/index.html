@@ -124,7 +124,7 @@ function getClientPos() {
 /*RENDER_ID: scrollbar-code*/
 /*NAME: Code*/
 function getNativeScrollbarWidth() {
-  var info = ScrollGet.getNativeScrollbarWidth(getEl('#scrollbar')[0])
+  var info = ScrollGet.getNativeScrollbarWidth()
   getEl('#scrollbar-text')[0].innerText = JSON.stringify(info)
 }
 
