@@ -1,86 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
-  <meta name="author" content="livelybone(2631541504@qq.com)">
-  <title>VueDatepicker -- livelybone</title>
-  <link rel="shortcut icon" href="../../logo.png">
-  <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="../../common/css/common.css">
-  <link rel="stylesheet" href="../../common/css/highlight.min.css">
-  <script src="../../common/js/common.js"></script>
-  <link rel="stylesheet" href="index.css">
-  <style>
-  body {
-    overflow-x: hidden;
-    margin: 0;
-  }
+    <meta charset="UTF-8">
+    <meta name="keywords" content="livelybone, plugins, vue, vuejs, react, js, javascript, node, php">
+    <meta name="author" content="livelybone(2631541504@qq.com)">
+    <title>VueDatepicker -- livelybone</title>
+    <link rel="shortcut icon" href="../../logo.png">
+    <link rel="shortcut icon" href="../../logo.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="../../common/css/common.css">
+    <link rel="stylesheet" href="../../common/css/highlight.min.css">
+    <script src="../../common/js/common.js"></script>
+    <link rel="stylesheet" href="index.css">
+    <style>
+    body {
+        overflow-x: hidden;
+        margin: 0;
+    }
 
-  .root-h1 a {
-    color: inherit;
-  }
+    .root-h1 a {
+        color: inherit;
+    }
 
-  .timepicker .vue-popper {
-    /*width: 120vw;*/
-  }
+    .timepicker .vue-popper {
+        /*width: 120vw;*/
+    }
 
-  .example-wrap.first {
-    border-top-width: 50vh;
-  }
+    .datepicker, .timepicker, .datetime-picker, .date-range-picker {
+        width: 3rem;
+        height: .3rem;
+        margin: 0 2em 0 0;
+    }
 
-  .datepicker, .timepicker, .datetime-picker {
-    width: 2rem;
-    height: .3rem;
-    margin: 0 2em 0 0;
-  }
+    input {
+        width: 0;
+        min-width: unset;
+    }
 
-  .root-module-title {
-    margin-top: .2rem;
-  }
-  </style>
+    .root-module-title {
+        margin-top: .2rem;
+    }
+    </style>
 </head>
 <body>
 <h1 class="root-h1">vue-datepicker
 </h1>
 <div class="app">
-  <h2 id="Repository" class="root-h">Repository</h2>
-  <div class="root-content-wrap">
-    <a href="https://github.com/livelybone/vue-datepicker" target="_blank">
-      https://github.com/livelybone/vue-datepicker
-    </a>
-  </div>
+    <h2 id="v3" class="root-h">vue-datepicker@3 Demo</h2>
+    <div class="root-content-wrap">
+        <a href="/vue/vue-datepicker-v3/index.html" target="_blank">
+            Here is demo of v3
+        </a>
+    </div>
+    <h2 id="Repository" class="root-h">Repository</h2>
+    <div class="root-content-wrap">
+        <a href="https://github.com/livelybone/vue-datepicker" target="_blank">
+            https://github.com/livelybone/vue-datepicker
+        </a>
+    </div>
 
-  <h2 id="Datepicker" class="root-h">Datepicker</h2>
-  <div class="example-wrap first">
-    <div class="root-module-title">Example</div>
-    <div id="date-picker"></div>
-    <div id="datepicker-code"></div>
-  </div>
+    <h2 id="Datepicker" class="root-h">Datepicker</h2>
+    <div class="example-wrap first">
+        <div class="root-module-title">Example</div>
+        <div id="date-picker"></div>
+        <div id="datepicker-code"></div>
+    </div>
 
-  <h2 id="Timepicker" class="root-h">Timepicker</h2>
-  <div class="example-wrap">
-    <div class="root-module-title">Example</div>
-    <div id="time-picker"></div>
-    <div id="timepicker-code"></div>
-  </div>
+    <h2 id="DatepickerCustomFirstDay" class="root-h">Datepicker: custom first day of weeh</h2>
+    <div class="example-wrap first">
+        <div class="root-module-title">Example</div>
+        <div id="date-picker-first"></div>
+        <div id="datepicker-first-code"></div>
+    </div>
 
-  <h2 id="DatetimePicker" class="root-h">DatetimePicker</h2>
-  <div class="example-wrap">
-    <div class="root-module-title">Example</div>
-    <div id="datetime-picker"></div>
-    <div id="datetime-picker-code"></div>
-  </div>
+    <h2 id="MultiDatepicker" class="root-h">Datepicker multiple select</h2>
+    <div class="example-wrap first">
+        <div class="root-module-title">Example</div>
+        <div id="multi-date-picker"></div>
+        <div id="multi-datepicker-code"></div>
+    </div>
 
+    <h2 id="DateRangePicker" class="root-h">DateRangePicker</h2>
+    <div class="example-wrap first">
+        <div class="root-module-title">Example</div>
+        <div id="date-range-picker"></div>
+        <div id="date-range-picker-code"></div>
+    </div>
+
+    <h2 id="Timepicker" class="root-h">Timepicker</h2>
+    <div class="example-wrap">
+        <div class="root-module-title">Example</div>
+        <div id="time-picker"></div>
+        <div id="timepicker-code"></div>
+    </div>
+
+    <h2 id="DatetimePicker" class="root-h">DatetimePicker</h2>
+    <div class="example-wrap">
+        <div class="root-module-title">Example</div>
+        <div id="datetime-picker"></div>
+        <div id="datetime-picker-code"></div>
+    </div>
 </div>
 
 <script src="../../common/js/highlight.min.js"></script>
 <script src="../../common/js/vue.min.js"></script>
-<script src="https://unpkg.com/is-mobile@1.0.0/index.js"></script>
-<script src="https://unpkg.com/@livelybone/vue-datepicker"></script>
+<script src="https://cdn.jsdelivr.net/npm/is-mobile@1.0.0/index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@livelybone/vue-datepicker@4"></script>
 <script type="text/javascript" id="code">
 var isM = isMobile()
-/*CATALOGUE: Repository, Datepicker, Timepicker, DatetimePicker, PopperProps*/
+/*CATALOGUE: Repository, Datepicker, DatepickerCustomFirstDay, MultiDatepicker, DateRangePicker, Timepicker, DatetimePicker, PopperProps*/
 
 /*START*/
 /*DESC:popperConfig, see in <a id="PopperProps" href="https://github.com/livelybone/vue-popper" target="_blank">@livelybone/vue-popper</a>*/
@@ -88,13 +115,13 @@ var popperProps = {
   popperOptions: {
     modifiers: {
       preventOverflow: {
-        padding: 20
-      }
+        padding: 20,
+      },
     },
     onUpdate: function (data) {
       console.log(JSON.stringify(data.attributes))
-    }
-  }
+    },
+  },
 }
 /*END*/
 
@@ -103,28 +130,128 @@ var popperProps = {
 /*NAME:Code*/
 new Vue({
   el: '#date-picker',
-  template: '<datepicker :value="date"' +
-  '                      @input="log"' +
-  '                      min="2018-6-1"' +
-  '                      max="2020-01-01"' +
-  '                      :dayStr="dayStr"' +
-  '                      :scrollbarProps="{isMobile: isM}"' +
-  '                      :popperProps="popperProps"/>',
+  template: '<datepicker' +
+    ' :value="date"' +
+    ' @input="log"' +
+    ' min="2018-6-1"' +
+    ' max="2030-01-01"' +
+    ' :dayStr="dayStr"' +
+    ' :scrollbarProps="{isMobile: isM}"' +
+    ' :popperProps="popperProps"' +
+    '/>',
   data: function () {
     return {
-      dayStr: ['7', '1', '2', '3', '4', '5', '6'],
+      dayStr: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
       date: '2018-06-01',
       isM: isM,
-      popperProps: popperProps
+      popperProps: popperProps,
     }
   },
   methods: {
     log: function (val) {
       this.date = val
       console.log(val)
+    },
+  },
+  components: { 'datepicker': VueDatepicker.Datepicker },
+})
+/*END*/
+
+/*START*/
+/*RENDER_ID:datepicker-first-code*/
+/*NAME:Code*/
+new Vue({
+  el: '#date-picker-first',
+  template: '<datepicker' +
+    ' :value="date"' +
+    ' @input="log"' +
+    ' min="2018-6-1"' +
+    ' max="2030-01-01"' +
+    ' :dayStr="dayStr"' +
+    ' :scrollbarProps="{isMobile: isM}"' +
+    ' :popperProps="popperProps"' +
+    ' :firstDayOfWeek="1"' +
+    '/>',
+  data: function () {
+    return {
+      dayStr: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      date: '2018-06-01',
+      isM: isM,
+      popperProps: popperProps,
     }
   },
-  components: { 'datepicker': VueDatepicker.Datepicker }
+  methods: {
+    log: function (val) {
+      this.date = val
+      console.log(val)
+    },
+  },
+  components: { 'datepicker': VueDatepicker.Datepicker },
+})
+/*END*/
+
+/*START*/
+/*RENDER_ID:multi-datepicker-code*/
+/*NAME:Code*/
+new Vue({
+  el: '#multi-date-picker',
+  template: '<datepicker' +
+    ' :multiple="true"' +
+    ' :value="date"' +
+    ' @input="log"' +
+    ' min="2018-6-1"' +
+    ' max="2030-01-01"' +
+    ' :dayStr="dayStr"' +
+    ' :scrollbarProps="{isMobile: isM}"' +
+    ' :popperProps="popperProps"' +
+    '/>',
+  data: function () {
+    return {
+      dayStr: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      date: '2018-06-01',
+      isM: isM,
+      popperProps: popperProps,
+    }
+  },
+  methods: {
+    log: function (val) {
+      this.date = val
+      console.log(val)
+    },
+  },
+  components: { 'datepicker': VueDatepicker.Datepicker },
+})
+/*END*/
+
+/*START*/
+/*RENDER_ID:date-range-picker-code*/
+/*NAME:Code*/
+new Vue({
+  el: '#date-range-picker',
+  template: '<date-range-picker' +
+    ' :value="date"' +
+    ' @input="log"' +
+    ' min="2018-6-1"' +
+    ' max="2030-01-01"' +
+    ' :dayStr="dayStr"' +
+    ' :scrollbarProps="{isMobile: isM}"' +
+    ' :popperProps="popperProps"' +
+    '/>',
+  data: function () {
+    return {
+      dayStr: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+      date: ['2018-06-01'],
+      isM: isM,
+      popperProps: popperProps,
+    }
+  },
+  methods: {
+    log: function (val) {
+      this.date = val
+      console.log(val)
+    },
+  },
+  components: { 'date-range-picker': VueDatepicker.DateRangePicker },
 })
 /*END*/
 
@@ -133,29 +260,31 @@ new Vue({
 /*NAME:Code*/
 new Vue({
   el: '#time-picker',
-  template: '<timepicker type="second"' +
-  '                      :value="time"' +
-  '                      @input="log"' +
-  '                      min="02:10:02"' +
-  '                      max="22:10:00"' +
-  '                      :timeStr="timeStr"' +
-  '                      :scrollbarProps="{isMobile:isM,maxHeight:\'2rem\'}"' +
-  '                      :popperProps="popperProps"/>',
+  template: '<timepicker' +
+    ' type="second"' +
+    ' :value="time"' +
+    ' @input="log"' +
+    ' min="02:10:02"' +
+    ' max="22:10:00"' +
+    ' :timeStr="timeStr"' +
+    ' :scrollbarProps="{isMobile:isM,maxHeight:\'2rem\'}"' +
+    ' :popperProps="popperProps"' +
+    '/>',
   data: function () {
     return {
       timeStr: ['hour', 'min', 'sec'],
       time: '03:02:01',
       isM: isM,
-      popperProps: popperProps
+      popperProps: popperProps,
     }
   },
   methods: {
     log: function (val) {
       this.time = val
       console.log(val)
-    }
+    },
   },
-  components: { 'timepicker': VueDatepicker.Timepicker }
+  components: { 'timepicker': VueDatepicker.Timepicker },
 })
 /*END*/
 
@@ -164,30 +293,32 @@ new Vue({
 /*NAME:Code*/
 new Vue({
   el: '#datetime-picker',
-  template: '<datetime-picker type="second"' +
-  '                           :value="time"' +
-  '                           @input="log"' +
-  '                           min="2018-08-24 02:10:02"' +
-  '                           max="2020-09-1 22:10:00"' +
-  '                           :timeStr="timeStr"' +
-  '                           :scrollbarProps="{isMobile:isM,maxHeight:\'2rem\'}"' +
-  '                           :popperProps="popperProps"/>',
+  template: '<datetime-picker' +
+    ' timeType="second"' +
+    ' :value="time"' +
+    ' @input="log"' +
+    ' min="2018-08-24 02:10:02"' +
+    ' max="2020-09-1 22:10:00"' +
+    ' :timeStr="timeStr"' +
+    ' :scrollbarProps="{isMobile:isM,maxHeight:\'2rem\'}"' +
+    ' :popperProps="popperProps"' +
+    '/>',
   data: function () {
     console.log('datetime-picker')
     return {
       timeStr: ['hour', 'min', 'sec'],
       time: '2019-02-01 01:02:01',
       isM: isM,
-      popperProps: popperProps
+      popperProps: popperProps,
     }
   },
   methods: {
     log: function (val) {
       this.time = val
       console.log(val)
-    }
+    },
   },
-  components: { 'datetime-picker': VueDatepicker.DatetimePicker }
+  components: { 'datetime-picker': VueDatepicker.DatetimePicker },
 })
 /*END*/
 </script>
