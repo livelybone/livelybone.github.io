@@ -76,24 +76,6 @@
     </a>
   </div>
 
-  <h2 id="GetNaturalSize" class="root-h">GetNaturalSize</h2>
-  <div class="example-wrap">
-    <h3 class="root-module-title">Example</h3>
-    <img id="img" src="../../common/images/naruto.jpeg"/>
-    <button style="display: block; margin-top: .1rem" onclick="getSize()">Get Size</button>
-    <span id="size-1" style="display: inline-block;margin: .1rem 0 0;"></span>
-    <div id="natural-code"></div>
-  </div>
-
-  <h2 id="GetNaturalSize-Url" class="root-h">GetNaturalSize by url</h2>
-  <div class="example-wrap">
-    <h3 class="root-module-title">Example</h3><br>
-    <label for="input">Image url: </label><input id="input" style="width: 3rem; max-width: 100%"/>
-    <button style="display: block; margin-top: .1rem" onclick="getSizeUrl()">Get Size</button>
-    <span id="size-2" style="display: inline-block;margin: .1rem 0 0;"></span>
-    <div id="natural-1-code"></div>
-  </div>
-
   <h2 id="ImageCompress" class="root-h">ImageCompress</h2>
   <div class="example-wrap">
     <h3 class="root-module-title">Example</h3><br>
@@ -131,6 +113,24 @@
       </div>
     </div>
     <div id="img-code"></div>
+  </div>
+
+  <h2 id="GetNaturalSize" class="root-h">GetNaturalSize</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3>
+    <img id="img" src="../../common/images/naruto.jpeg"/>
+    <button style="display: block; margin-top: .1rem" onclick="getSize()">Get Size</button>
+    <span id="size-1" style="display: inline-block;margin: .1rem 0 0;"></span>
+    <div id="natural-code"></div>
+  </div>
+
+  <h2 id="GetNaturalSize-Url" class="root-h">GetNaturalSize by url</h2>
+  <div class="example-wrap">
+    <h3 class="root-module-title">Example</h3><br>
+    <label for="input">Image url: </label><input id="input" style="width: 3rem; max-width: 100%"/>
+    <button style="display: block; margin-top: .1rem" onclick="getSizeUrl()">Get Size</button>
+    <span id="size-2" style="display: inline-block;margin: .1rem 0 0;"></span>
+    <div id="natural-1-code"></div>
   </div>
 </section>
 
@@ -203,6 +203,12 @@ function minify() {
 }
 
 function bindOptions() {
+  var input = getEl('#file')[0]
+  input.addEventListener('change', function (ev) {
+    const file = ev.target.files[0]
+    getEl('#imageType')[0].value = file ? file.type : ''
+  })
+
   var idArr = [
     { id: 'compressType', type: 'select' },
     { id: 'scale', type: 'number' },
